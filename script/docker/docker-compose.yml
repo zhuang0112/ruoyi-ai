@@ -45,7 +45,7 @@ services:
       # 连接超时时间
       REDIS_TIMEOUT: 10s
     volumes:
-      - /docker/server2/logs/:/ruoyi/server/logs/
+      - /opt/docker/server2/logs/:/ruoyi/server/logs/
 
   ruoyi-web:
     image: registry.cn-shanghai.aliyuncs.com/ruoyi-ai/web:1.2.1

@@ -233,7 +233,7 @@ CREATE TABLE `chat_message`  (
 DROP TABLE IF EXISTS `chat_model`;
 CREATE TABLE `chat_model`  (
   `id` bigint(20) NOT NULL COMMENT '主键',
-  `tenant_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '000000' COMMENT '租户编号',
+  `tenant_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '00000' COMMENT '租户编号',
   `category` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '模型分类',
   `model_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '模型名称',
   `model_describe` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '模型描述',
@@ -255,20 +255,20 @@ CREATE TABLE `chat_model`  (
 -- ----------------------------
 -- Records of chat_model
 -- ----------------------------
-INSERT INTO `chat_model` VALUES (1781709495515783171, '000000', 'chat', 'gpt-4-all', 'gpt-4-hhh', 0, '2', '0', NULL, 'https://api.pandarobot.chat/', 'sk-xx', 103, 1, '2024-04-20 23:40:41', 1, '2025-03-31 16:32:19', 'My name is Tr0e');
-INSERT INTO `chat_model` VALUES (1781715781896646657, '000000', 'chat', 'suno-v3', 'suno-v3', 0.3, '1', '0', NULL, 'https://api.pandarobot.chat/', 'sk-xx', 103, 1, '2024-04-21 00:05:20', 1, '2025-03-31 13:24:33', 'suno-v3');
-INSERT INTO `chat_model` VALUES (1781728235120791553, '000000', 'chat', 'stable-diffusion', 'stable-diffusion', 0.1, '2', '1', NULL, 'https://api.pandarobot.chat/', 'sk-xx', 103, 1, '2024-04-21 00:54:49', 1, '2025-03-26 10:46:38', 'stable-diffusion');
-INSERT INTO `chat_model` VALUES (1782736322308943873, '000000', 'chat', 'dall-e-3', 'dall3', 0.3, '2', '1', '', 'https://api.pandarobot.chat/', 'sk-xx', 103, 1, '2024-04-23 19:40:36', 1, '2025-03-27 10:08:07', 'dall3');
-INSERT INTO `chat_model` VALUES (1782736729471004673, '000000', 'chat', 'gpt-4-gizmo', 'gpt-4-gizmo', 0.2, '2', '1', NULL, 'https://api.pandarobot.chat/', 'sk-xx', 103, 1, '2024-04-23 19:42:13', 1, '2025-03-06 20:16:42', 'gpt-4-gizmo');
-INSERT INTO `chat_model` VALUES (1782792839548735490, '000000', 'chat', 'midjourney', 'midjourney', 0.5, '2', '1', NULL, 'https://api.pandarobot.chat/', 'sk-xx', 103, 1, '2024-04-23 23:25:10', 1, '2025-03-23 09:15:55', 'midjourney');
-INSERT INTO `chat_model` VALUES (1782792839548735491, '000000', 'chat', 'suno', 'suno', 0.3, '2', '1', NULL, 'https://api.pandarobot.chat/', 'sk-xx', 103, 1, '2024-04-23 23:25:10', 1, '2024-12-27 22:29:15', 'suno');
-INSERT INTO `chat_model` VALUES (1782792839548735492, '000000', 'chat', 'luma', 'luma', 1, '2', '1', NULL, 'https://api.pandarobot.chat/', 'sk-xx', 103, 1, '2024-04-23 23:25:10', 1, '2025-03-27 10:08:15', 'luma');
-INSERT INTO `chat_model` VALUES (1782792839548735493, '000000', 'chat', 'ppt', 'ppt', 1.1, '2', '1', NULL, 'https://docmee.cn', 'sk-xx', 103, 1, '2025-01-10 23:25:10', 1, '2025-03-22 08:30:29', 'ppt');
-INSERT INTO `chat_model` VALUES (1811030708604317697, '000000', 'chat', 'gemini-1.5-pro', 'gemini-1.5-pro', 0.2, '1', '0', '', 'https://api.pandarobot.chat/', 'sk-xx', 103, 1, '2024-07-10 21:32:23', 1, '2025-03-27 16:37:17', 'gemini-1.5-pro');
-INSERT INTO `chat_model` VALUES (1813306888443305986, '000000', 'chat', 'claude-3-5-sonnet-20240620', 'claude-3-5-sonnet-20240620', 0.2, '1', '1', NULL, 'https://api.pandarobot.chat/', 'sk-xx', 103, 1, '2024-07-17 04:17:06', 1, '2025-03-23 09:15:49', 'claude-3-5-sonnet-20240620');
-INSERT INTO `chat_model` VALUES (1814227154275082242, '000000', 'chat', 'o1-mini-2024-09-12', 'o1-mini-2024-09-12', 0.01, '1', '1', NULL, 'https://api.pandarobot.chat/', 'sk-xx', 103, 1, '2024-07-19 17:13:55', 1, '2025-03-23 09:15:41', 'o1-mini-2024-09-12');
-INSERT INTO `chat_model` VALUES (1828324413241466881, '000000', 'chat', 'deepseek-r1', 'deepseek-r1', 0.01, '1', '0', NULL, 'https://api.pandarobot.chat/', 'sk-xx', 103, 1, '2024-08-27 14:51:23', NULL, '2025-03-27 16:21:04', 'chatgpt-4o-latest');
-INSERT INTO `chat_model` VALUES (1859570229117022211, '000000', 'chat', 'gpt-4o-mini', 'gpt-4o-mini', 0.1, '2', '0', '', 'https://api.pandarobot.chat/', 'sk-xx', 103, 1, '2024-11-21 20:11:06', 1, '2025-03-27 16:20:39', '1');
+INSERT INTO `chat_model` VALUES (1781709495515783171, '00000', 'chat', 'gpt-4-all', 'gpt-4-hhh', 0, '2', '0', NULL, 'https://api.pandarobot.chat/', 'sk-xx', 103, 1, '2024-04-20 23:40:41', 1, '2025-03-31 16:32:19', 'My name is Tr0e');
+INSERT INTO `chat_model` VALUES (1781715781896646657, '00000', 'chat', 'suno-v3', 'suno-v3', 0.3, '1', '0', NULL, 'https://api.pandarobot.chat/', 'sk-xx', 103, 1, '2024-04-21 00:05:20', 1, '2025-03-31 13:24:33', 'suno-v3');
+INSERT INTO `chat_model` VALUES (1781728235120791553, '00000', 'chat', 'stable-diffusion', 'stable-diffusion', 0.1, '2', '1', NULL, 'https://api.pandarobot.chat/', 'sk-xx', 103, 1, '2024-04-21 00:54:49', 1, '2025-03-26 10:46:38', 'stable-diffusion');
+INSERT INTO `chat_model` VALUES (1782736322308943873, '00000', 'chat', 'dall-e-3', 'dall3', 0.3, '2', '1', '', 'https://api.pandarobot.chat/', 'sk-xx', 103, 1, '2024-04-23 19:40:36', 1, '2025-03-27 10:08:07', 'dall3');
+INSERT INTO `chat_model` VALUES (1782736729471004673, '00000', 'chat', 'gpt-4-gizmo', 'gpt-4-gizmo', 0.2, '2', '1', NULL, 'https://api.pandarobot.chat/', 'sk-xx', 103, 1, '2024-04-23 19:42:13', 1, '2025-03-06 20:16:42', 'gpt-4-gizmo');
+INSERT INTO `chat_model` VALUES (1782792839548735490, '00000', 'chat', 'midjourney', 'midjourney', 0.5, '2', '1', NULL, 'https://api.pandarobot.chat/', 'sk-xx', 103, 1, '2024-04-23 23:25:10', 1, '2025-03-23 09:15:55', 'midjourney');
+INSERT INTO `chat_model` VALUES (1782792839548735491, '00000', 'chat', 'suno', 'suno', 0.3, '2', '1', NULL, 'https://api.pandarobot.chat/', 'sk-xx', 103, 1, '2024-04-23 23:25:10', 1, '2024-12-27 22:29:15', 'suno');
+INSERT INTO `chat_model` VALUES (1782792839548735492, '00000', 'chat', 'luma', 'luma', 1, '2', '1', NULL, 'https://api.pandarobot.chat/', 'sk-xx', 103, 1, '2024-04-23 23:25:10', 1, '2025-03-27 10:08:15', 'luma');
+INSERT INTO `chat_model` VALUES (1782792839548735493, '00000', 'chat', 'ppt', 'ppt', 1.1, '2', '1', NULL, 'https://docmee.cn', 'sk-xx', 103, 1, '2025-01-10 23:25:10', 1, '2025-03-22 08:30:29', 'ppt');
+INSERT INTO `chat_model` VALUES (1811030708604317697, '00000', 'chat', 'gemini-1.5-pro', 'gemini-1.5-pro', 0.2, '1', '0', '', 'https://api.pandarobot.chat/', 'sk-xx', 103, 1, '2024-07-10 21:32:23', 1, '2025-03-27 16:37:17', 'gemini-1.5-pro');
+INSERT INTO `chat_model` VALUES (1813306888443305986, '00000', 'chat', 'claude-3-5-sonnet-20240620', 'claude-3-5-sonnet-20240620', 0.2, '1', '1', NULL, 'https://api.pandarobot.chat/', 'sk-xx', 103, 1, '2024-07-17 04:17:06', 1, '2025-03-23 09:15:49', 'claude-3-5-sonnet-20240620');
+INSERT INTO `chat_model` VALUES (1814227154275082242, '00000', 'chat', 'o1-mini-2024-09-12', 'o1-mini-2024-09-12', 0.01, '1', '1', NULL, 'https://api.pandarobot.chat/', 'sk-xx', 103, 1, '2024-07-19 17:13:55', 1, '2025-03-23 09:15:41', 'o1-mini-2024-09-12');
+INSERT INTO `chat_model` VALUES (1828324413241466881, '00000', 'chat', 'deepseek-r1', 'deepseek-r1', 0.01, '1', '0', NULL, 'https://api.pandarobot.chat/', 'sk-xx', 103, 1, '2024-08-27 14:51:23', NULL, '2025-03-27 16:21:04', 'chatgpt-4o-latest');
+INSERT INTO `chat_model` VALUES (1859570229117022211, '00000', 'chat', 'gpt-4o-mini', 'gpt-4o-mini', 0.1, '2', '0', '', 'https://api.pandarobot.chat/', 'sk-xx', 103, 1, '2024-11-21 20:11:06', 1, '2025-03-27 16:20:39', '1');
 
 -- ----------------------------
 -- Table structure for chat_package_plan
@@ -584,7 +584,7 @@ CREATE TABLE `knowledge_info`  (
 DROP TABLE IF EXISTS `sys_config`;
 CREATE TABLE `sys_config`  (
   `config_id` bigint(20) NOT NULL COMMENT '参数主键',
-  `tenant_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '000000' COMMENT '租户编号',
+  `tenant_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '00000' COMMENT '租户编号',
   `config_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '参数名称',
   `config_key` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '参数键名',
   `config_value` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '参数键值',
@@ -601,31 +601,31 @@ CREATE TABLE `sys_config`  (
 -- ----------------------------
 -- Records of sys_config
 -- ----------------------------
-INSERT INTO `sys_config` VALUES (1, '000000', '时间参数', 'skin-purple', 'skin-blue', 'N', 103, 1, '2023-05-14 15:19:42', 1, '2025-03-28 22:30:49', '蓝色 skin-blue、绿色 skin-green、紫色 skin-purple、红色 skin-red、黄色 skin-yellow');
-INSERT INTO `sys_config` VALUES (2, '000000', '显示方式', 'sys.user.initPassword', '123456', 'N', 103, 1, '2023-05-14 15:19:42', 1, '2025-03-28 10:40:44', '初始化密码 123456');
-INSERT INTO `sys_config` VALUES (3, '000000', '回答模板', 'sys.index.sideTheme', 'theme-dark', 'Y', 103, 1, '2023-05-14 15:19:42', 1, '2025-03-28 10:40:50', '深色主题theme-dark，浅色主题theme-light');
-INSERT INTO `sys_config` VALUES (5, '000000', '无结果时是否交由其他回答指令模板进行配置处理', 'sys.account.registerUser', 'false', 'Y', 103, 1, '2023-05-14 15:19:42', 1, '2025-03-28 10:40:57', '是否开启注册用户功能（true开启，false关闭）');
-INSERT INTO `sys_config` VALUES (11, '000000', 'OSS预览列表资源开关', 'sys.oss.previewListResource', 'true', 'Y', 103, 1, '2023-05-14 15:19:42', NULL, NULL, 'true:开启, false:关闭');
-INSERT INTO `sys_config` VALUES (1901957791626854401, '000000', '1', '1', '1', 'N', 103, 1, '2025-03-18 19:24:09', 1, '2025-03-18 19:24:09', NULL);
-INSERT INTO `sys_config` VALUES (1902001922927525890, '000000', '111', '111', '111', 'N', 103, 1, '2025-03-18 22:19:31', 1, '2025-03-18 22:19:31', NULL);
-INSERT INTO `sys_config` VALUES (1903121770873139202, '000000', '12', '12', '12', 'N', 103, 1, '2025-03-22 00:29:23', 1, '2025-03-22 00:29:23', NULL);
-INSERT INTO `sys_config` VALUES (1903148170321637377, '000000', '324', '234', '234', 'N', 103, 1, '2025-03-22 02:14:17', 1, '2025-03-22 02:14:17', NULL);
-INSERT INTO `sys_config` VALUES (1903150187299516418, '000000', '1去', '额', '额外', 'N', 103, 1, '2025-03-22 02:22:18', 1, '2025-03-22 02:22:18', NULL);
-INSERT INTO `sys_config` VALUES (1903150796597669890, '000000', '1323321', '1321', '1', 'Y', 103, 1, '2025-03-22 02:24:43', 1, '2025-03-22 02:24:43', NULL);
-INSERT INTO `sys_config` VALUES (1903977127044497410, '000000', 'aq', 'as', 'sa', 'Y', 103, 1, '2025-03-24 09:08:16', 1, '2025-03-24 09:08:16', 'as');
-INSERT INTO `sys_config` VALUES (1903992403639189505, '000000', '12', '12323234', '1', 'N', 103, 1, '2025-03-24 10:08:58', 1, '2025-03-24 10:08:58', '1');
-INSERT INTO `sys_config` VALUES (1904348758011060225, '000000', '123', '123', '123', 'N', 103, 1, '2025-03-25 09:45:00', 1, '2025-03-25 09:45:00', NULL);
-INSERT INTO `sys_config` VALUES (1904433831695654913, '000000', 'Test01', '1111', '1222', 'N', 103, 1, '2025-03-25 15:23:03', 1, '2025-03-28 22:30:53', '123123');
-INSERT INTO `sys_config` VALUES (1904492290667487233, '000000', 'test', 'test', 'test', 'Y', 103, 1, '2025-03-25 19:15:21', 1, '2025-03-25 19:15:21', '阿斯顿发');
-INSERT INTO `sys_config` VALUES (1904526572685402114, '000000', 'a', 'k', '123', 'N', 103, 1, '2025-03-25 21:31:34', 1, '2025-03-25 21:31:34', NULL);
-INSERT INTO `sys_config` VALUES (1904730931222323202, '000000', '支付111', '支付111', '100', 'N', 103, 1, '2025-03-26 11:03:37', 1, '2025-03-26 11:03:37', '测试');
-INSERT INTO `sys_config` VALUES (1904731973473312770, '000000', '积分兑换111', '121', '121', 'N', 103, 1, '2025-03-26 11:07:45', 1, '2025-03-26 11:07:45', '积分兑换');
-INSERT INTO `sys_config` VALUES (1904789679236227073, '000000', '2', '2', '2', 'N', 103, 1, '2025-03-26 14:57:03', 1, '2025-03-26 14:57:03', NULL);
-INSERT INTO `sys_config` VALUES (1905070856643846146, '000000', '21', '21', '2121', 'N', 103, 1, '2025-03-27 09:34:21', 1, '2025-03-27 09:34:21', '21212');
-INSERT INTO `sys_config` VALUES (1905449847099793409, '000000', '指标时间参数配置', '12321', '12321', 'N', 103, 1, '2025-03-28 10:40:20', 1, '2025-03-28 10:40:20', NULL);
-INSERT INTO `sys_config` VALUES (1906533795238289409, '000000', '123222', '123222', '123222', 'Y', 103, 1, '2025-03-31 10:27:33', 1, '2025-03-31 10:27:33', NULL);
-INSERT INTO `sys_config` VALUES (1906597665071996929, '000000', '什么都参数', '什么都参数', '1', 'Y', 103, 1, '2025-03-31 14:41:21', 1, '2025-03-31 14:41:21', '1');
-INSERT INTO `sys_config` VALUES (1906619956543660034, '000000', '测试', '测试', '测试', 'N', 103, 1, '2025-03-31 16:09:56', 1, '2025-03-31 16:09:56', NULL);
+INSERT INTO `sys_config` VALUES (1, '00000', '时间参数', 'skin-purple', 'skin-blue', 'N', 103, 1, '2023-05-14 15:19:42', 1, '2025-03-28 22:30:49', '蓝色 skin-blue、绿色 skin-green、紫色 skin-purple、红色 skin-red、黄色 skin-yellow');
+INSERT INTO `sys_config` VALUES (2, '00000', '显示方式', 'sys.user.initPassword', '123456', 'N', 103, 1, '2023-05-14 15:19:42', 1, '2025-03-28 10:40:44', '初始化密码 123456');
+INSERT INTO `sys_config` VALUES (3, '00000', '回答模板', 'sys.index.sideTheme', 'theme-dark', 'Y', 103, 1, '2023-05-14 15:19:42', 1, '2025-03-28 10:40:50', '深色主题theme-dark，浅色主题theme-light');
+INSERT INTO `sys_config` VALUES (5, '00000', '无结果时是否交由其他回答指令模板进行配置处理', 'sys.account.registerUser', 'false', 'Y', 103, 1, '2023-05-14 15:19:42', 1, '2025-03-28 10:40:57', '是否开启注册用户功能（true开启，false关闭）');
+INSERT INTO `sys_config` VALUES (11, '00000', 'OSS预览列表资源开关', 'sys.oss.previewListResource', 'true', 'Y', 103, 1, '2023-05-14 15:19:42', NULL, NULL, 'true:开启, false:关闭');
+INSERT INTO `sys_config` VALUES (1901957791626854401, '00000', '1', '1', '1', 'N', 103, 1, '2025-03-18 19:24:09', 1, '2025-03-18 19:24:09', NULL);
+INSERT INTO `sys_config` VALUES (1902001922927525890, '00000', '111', '111', '111', 'N', 103, 1, '2025-03-18 22:19:31', 1, '2025-03-18 22:19:31', NULL);
+INSERT INTO `sys_config` VALUES (1903121770873139202, '00000', '12', '12', '12', 'N', 103, 1, '2025-03-22 00:29:23', 1, '2025-03-22 00:29:23', NULL);
+INSERT INTO `sys_config` VALUES (1903148170321637377, '00000', '324', '234', '234', 'N', 103, 1, '2025-03-22 02:14:17', 1, '2025-03-22 02:14:17', NULL);
+INSERT INTO `sys_config` VALUES (1903150187299516418, '00000', '1去', '额', '额外', 'N', 103, 1, '2025-03-22 02:22:18', 1, '2025-03-22 02:22:18', NULL);
+INSERT INTO `sys_config` VALUES (1903150796597669890, '00000', '1323321', '1321', '1', 'Y', 103, 1, '2025-03-22 02:24:43', 1, '2025-03-22 02:24:43', NULL);
+INSERT INTO `sys_config` VALUES (1903977127044497410, '00000', 'aq', 'as', 'sa', 'Y', 103, 1, '2025-03-24 09:08:16', 1, '2025-03-24 09:08:16', 'as');
+INSERT INTO `sys_config` VALUES (1903992403639189505, '00000', '12', '12323234', '1', 'N', 103, 1, '2025-03-24 10:08:58', 1, '2025-03-24 10:08:58', '1');
+INSERT INTO `sys_config` VALUES (1904348758011060225, '00000', '123', '123', '123', 'N', 103, 1, '2025-03-25 09:45:00', 1, '2025-03-25 09:45:00', NULL);
+INSERT INTO `sys_config` VALUES (1904433831695654913, '00000', 'Test01', '1111', '1222', 'N', 103, 1, '2025-03-25 15:23:03', 1, '2025-03-28 22:30:53', '123123');
+INSERT INTO `sys_config` VALUES (1904492290667487233, '00000', 'test', 'test', 'test', 'Y', 103, 1, '2025-03-25 19:15:21', 1, '2025-03-25 19:15:21', '阿斯顿发');
+INSERT INTO `sys_config` VALUES (1904526572685402114, '00000', 'a', 'k', '123', 'N', 103, 1, '2025-03-25 21:31:34', 1, '2025-03-25 21:31:34', NULL);
+INSERT INTO `sys_config` VALUES (1904730931222323202, '00000', '支付111', '支付111', '100', 'N', 103, 1, '2025-03-26 11:03:37', 1, '2025-03-26 11:03:37', '测试');
+INSERT INTO `sys_config` VALUES (1904731973473312770, '00000', '积分兑换111', '121', '121', 'N', 103, 1, '2025-03-26 11:07:45', 1, '2025-03-26 11:07:45', '积分兑换');
+INSERT INTO `sys_config` VALUES (1904789679236227073, '00000', '2', '2', '2', 'N', 103, 1, '2025-03-26 14:57:03', 1, '2025-03-26 14:57:03', NULL);
+INSERT INTO `sys_config` VALUES (1905070856643846146, '00000', '21', '21', '2121', 'N', 103, 1, '2025-03-27 09:34:21', 1, '2025-03-27 09:34:21', '21212');
+INSERT INTO `sys_config` VALUES (1905449847099793409, '00000', '指标时间参数配置', '12321', '12321', 'N', 103, 1, '2025-03-28 10:40:20', 1, '2025-03-28 10:40:20', NULL);
+INSERT INTO `sys_config` VALUES (1906533795238289409, '00000', '123222', '123222', '123222', 'Y', 103, 1, '2025-03-31 10:27:33', 1, '2025-03-31 10:27:33', NULL);
+INSERT INTO `sys_config` VALUES (1906597665071996929, '00000', '什么都参数', '什么都参数', '1', 'Y', 103, 1, '2025-03-31 14:41:21', 1, '2025-03-31 14:41:21', '1');
+INSERT INTO `sys_config` VALUES (1906619956543660034, '00000', '测试', '测试', '测试', 'N', 103, 1, '2025-03-31 16:09:56', 1, '2025-03-31 16:09:56', NULL);
 
 -- ----------------------------
 -- Table structure for sys_dept
@@ -633,7 +633,7 @@ INSERT INTO `sys_config` VALUES (1906619956543660034, '000000', '测试', '测�
 DROP TABLE IF EXISTS `sys_dept`;
 CREATE TABLE `sys_dept`  (
   `dept_id` bigint(20) NOT NULL COMMENT '部门id',
-  `tenant_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '000000' COMMENT '租户编号',
+  `tenant_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '00000' COMMENT '租户编号',
   `parent_id` bigint(20) NULL DEFAULT 0 COMMENT '父部门id',
   `ancestors` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '祖级列表',
   `dept_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '部门名称',
@@ -654,22 +654,22 @@ CREATE TABLE `sys_dept`  (
 -- ----------------------------
 -- Records of sys_dept
 -- ----------------------------
-INSERT INTO `sys_dept` VALUES (100, '000000', 0, '0', '熊猫科技', 0, 'ageerle', '15888888888', 'ageerle@163.com', '0', '0', 103, 1, '2023-05-14 15:19:39', 1, '2023-12-29 11:18:24');
-INSERT INTO `sys_dept` VALUES (101, '000000', 100, '0,100', '深圳总公司', 1, '疯狂的狮子Li', '15888888888', 'xxx@qq.com', '0', '0', 103, 1, '2023-05-14 15:19:39', NULL, NULL);
-INSERT INTO `sys_dept` VALUES (102, '000000', 100, '0,100', '长沙分公司', 2, '疯狂的狮子Li', '15888888888', 'xxx@qq.com', '0', '2', 103, 1, '2023-05-14 15:19:39', NULL, NULL);
-INSERT INTO `sys_dept` VALUES (103, '000000', 101, '0,100,101', '研发部门', 1, '疯狂的狮子Li', '15888888888', 'xxx@qq.com', '0', '0', 103, 1, '2023-05-14 15:19:39', NULL, NULL);
-INSERT INTO `sys_dept` VALUES (104, '000000', 101, '0,100,101', '市场部门', 2, '疯狂的狮子Li', '15888888888', 'xxx@qq.com', '0', '2', 103, 1, '2023-05-14 15:19:39', NULL, NULL);
-INSERT INTO `sys_dept` VALUES (105, '000000', 101, '0,100,101', '测试部门', 3, '疯狂的狮子Li', '15888888888', 'xxx@qq.com', '0', '2', 103, 1, '2023-05-14 15:19:39', NULL, NULL);
-INSERT INTO `sys_dept` VALUES (106, '000000', 101, '0,100,101', '财务部门', 4, '疯狂的狮子Li', '15888888888', 'xxx@qq.com', '0', '2', 103, 1, '2023-05-14 15:19:39', NULL, NULL);
-INSERT INTO `sys_dept` VALUES (107, '000000', 101, '0,100,101', '运维部门', 5, '疯狂的狮子Li', '15888888888', 'xxx@qq.com', '0', '2', 103, 1, '2023-05-14 15:19:39', NULL, NULL);
-INSERT INTO `sys_dept` VALUES (108, '000000', 102, '0,100,102', '市场部门', 1, '疯狂的狮子Li', '15888888888', 'xxx@qq.com', '0', '2', 103, 1, '2023-05-14 15:19:39', NULL, NULL);
-INSERT INTO `sys_dept` VALUES (109, '000000', 102, '0,100,102', '财务部门', 2, '疯狂的狮子Li', '15888888888', 'xxx@qq.com', '0', '2', 103, 1, '2023-05-14 15:19:39', NULL, NULL);
-INSERT INTO `sys_dept` VALUES (1903101865297752066, '000000', 103, '0,100,101,103', 'AA', 1, NULL, '18701676790', '1234@ss.com', '0', '0', 103, 1, '2025-03-21 23:10:17', 1, '2025-03-21 23:10:17');
-INSERT INTO `sys_dept` VALUES (1904430886174367746, '000000', 1903101865297752066, '0,100,101,103,1903101865297752066', '测试', 1, NULL, NULL, NULL, '0', '0', 103, 1, '2025-03-25 15:11:21', 1, '2025-03-25 15:11:21');
-INSERT INTO `sys_dept` VALUES (1904736932721893377, '000000', 101, '0,100,101', '研发部门2', 100, NULL, NULL, NULL, '0', '0', 103, 1, '2025-03-26 11:27:28', 1, '2025-03-26 11:27:28');
-INSERT INTO `sys_dept` VALUES (1905140221372309505, '000000', 1903101865297752066, '0,100,101,103,1903101865297752066', 'test', 1, NULL, NULL, NULL, '0', '0', 103, 1, '2025-03-27 14:09:59', 1, '2025-03-27 14:09:59');
-INSERT INTO `sys_dept` VALUES (1905554900431183874, '000000', 103, '0,100,101,103', '部门1', 5, NULL, NULL, NULL, '0', '0', 103, 1, '2025-03-28 17:37:46', 1, '2025-03-28 17:37:46');
-INSERT INTO `sys_dept` VALUES (1905849169498906626, '000000', 1903101865297752066, '0,100,101,103,1903101865297752066', '111111', 1, NULL, NULL, NULL, '0', '0', 103, 1, '2025-03-29 13:07:06', 1, '2025-03-29 13:07:06');
+INSERT INTO `sys_dept` VALUES (100, '00000', 0, '0', '熊猫科技', 0, 'ageerle', '15888888888', 'ageerle@163.com', '0', '0', 103, 1, '2023-05-14 15:19:39', 1, '2023-12-29 11:18:24');
+INSERT INTO `sys_dept` VALUES (101, '00000', 100, '0,100', '深圳总公司', 1, '疯狂的狮子Li', '15888888888', 'xxx@qq.com', '0', '0', 103, 1, '2023-05-14 15:19:39', NULL, NULL);
+INSERT INTO `sys_dept` VALUES (102, '00000', 100, '0,100', '长沙分公司', 2, '疯狂的狮子Li', '15888888888', 'xxx@qq.com', '0', '2', 103, 1, '2023-05-14 15:19:39', NULL, NULL);
+INSERT INTO `sys_dept` VALUES (103, '00000', 101, '0,100,101', '研发部门', 1, '疯狂的狮子Li', '15888888888', 'xxx@qq.com', '0', '0', 103, 1, '2023-05-14 15:19:39', NULL, NULL);
+INSERT INTO `sys_dept` VALUES (104, '00000', 101, '0,100,101', '市场部门', 2, '疯狂的狮子Li', '15888888888', 'xxx@qq.com', '0', '2', 103, 1, '2023-05-14 15:19:39', NULL, NULL);
+INSERT INTO `sys_dept` VALUES (105, '00000', 101, '0,100,101', '测试部门', 3, '疯狂的狮子Li', '15888888888', 'xxx@qq.com', '0', '2', 103, 1, '2023-05-14 15:19:39', NULL, NULL);
+INSERT INTO `sys_dept` VALUES (106, '00000', 101, '0,100,101', '财务部门', 4, '疯狂的狮子Li', '15888888888', 'xxx@qq.com', '0', '2', 103, 1, '2023-05-14 15:19:39', NULL, NULL);
+INSERT INTO `sys_dept` VALUES (107, '00000', 101, '0,100,101', '运维部门', 5, '疯狂的狮子Li', '15888888888', 'xxx@qq.com', '0', '2', 103, 1, '2023-05-14 15:19:39', NULL, NULL);
+INSERT INTO `sys_dept` VALUES (108, '00000', 102, '0,100,102', '市场部门', 1, '疯狂的狮子Li', '15888888888', 'xxx@qq.com', '0', '2', 103, 1, '2023-05-14 15:19:39', NULL, NULL);
+INSERT INTO `sys_dept` VALUES (109, '00000', 102, '0,100,102', '财务部门', 2, '疯狂的狮子Li', '15888888888', 'xxx@qq.com', '0', '2', 103, 1, '2023-05-14 15:19:39', NULL, NULL);
+INSERT INTO `sys_dept` VALUES (1903101865297752066, '00000', 103, '0,100,101,103', 'AA', 1, NULL, '18701676790', '1234@ss.com', '0', '0', 103, 1, '2025-03-21 23:10:17', 1, '2025-03-21 23:10:17');
+INSERT INTO `sys_dept` VALUES (1904430886174367746, '00000', 1903101865297752066, '0,100,101,103,1903101865297752066', '测试', 1, NULL, NULL, NULL, '0', '0', 103, 1, '2025-03-25 15:11:21', 1, '2025-03-25 15:11:21');
+INSERT INTO `sys_dept` VALUES (1904736932721893377, '00000', 101, '0,100,101', '研发部门2', 100, NULL, NULL, NULL, '0', '0', 103, 1, '2025-03-26 11:27:28', 1, '2025-03-26 11:27:28');
+INSERT INTO `sys_dept` VALUES (1905140221372309505, '00000', 1903101865297752066, '0,100,101,103,1903101865297752066', 'test', 1, NULL, NULL, NULL, '0', '0', 103, 1, '2025-03-27 14:09:59', 1, '2025-03-27 14:09:59');
+INSERT INTO `sys_dept` VALUES (1905554900431183874, '00000', 103, '0,100,101,103', '部门1', 5, NULL, NULL, NULL, '0', '0', 103, 1, '2025-03-28 17:37:46', 1, '2025-03-28 17:37:46');
+INSERT INTO `sys_dept` VALUES (1905849169498906626, '00000', 1903101865297752066, '0,100,101,103,1903101865297752066', '111111', 1, NULL, NULL, NULL, '0', '0', 103, 1, '2025-03-29 13:07:06', 1, '2025-03-29 13:07:06');
 
 -- ----------------------------
 -- Table structure for sys_dict_data
@@ -677,7 +677,7 @@ INSERT INTO `sys_dept` VALUES (1905849169498906626, '000000', 190310186529775206
 DROP TABLE IF EXISTS `sys_dict_data`;
 CREATE TABLE `sys_dict_data`  (
   `dict_code` bigint(20) NOT NULL COMMENT '字典编码',
-  `tenant_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '000000' COMMENT '租户编号',
+  `tenant_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '00000' COMMENT '租户编号',
   `dict_sort` int(4) NULL DEFAULT 0 COMMENT '字典排序',
   `dict_label` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '字典标签',
   `dict_value` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '字典键值',
@@ -698,37 +698,37 @@ CREATE TABLE `sys_dict_data`  (
 -- ----------------------------
 -- Records of sys_dict_data
 -- ----------------------------
-INSERT INTO `sys_dict_data` VALUES (1, '000000', 1, '男', '0', 'sys_user_sex', '', '', 'Y', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '性别男');
-INSERT INTO `sys_dict_data` VALUES (2, '000000', 2, '女', '1', 'sys_user_sex', '', '', 'N', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '性别女');
-INSERT INTO `sys_dict_data` VALUES (3, '000000', 3, '未知', '2', 'sys_user_sex', '', '', 'N', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '性别未知');
-INSERT INTO `sys_dict_data` VALUES (4, '000000', 1, '显示', '0', 'sys_show_hide', '', 'primary', 'Y', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '显示菜单');
-INSERT INTO `sys_dict_data` VALUES (5, '000000', 2, '隐藏', '1', 'sys_show_hide', '', 'danger', 'N', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '隐藏菜单');
-INSERT INTO `sys_dict_data` VALUES (6, '000000', 1, '正常', '0', 'sys_normal_disable', '', 'primary', 'Y', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '正常状态');
-INSERT INTO `sys_dict_data` VALUES (7, '000000', 2, '停用', '1', 'sys_normal_disable', '', 'danger', 'N', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '停用状态');
-INSERT INTO `sys_dict_data` VALUES (12, '000000', 1, '是', 'Y', 'sys_yes_no', '', 'primary', 'Y', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '系统默认是');
-INSERT INTO `sys_dict_data` VALUES (13, '000000', 2, '否', 'N', 'sys_yes_no', '', 'danger', 'N', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '系统默认否');
-INSERT INTO `sys_dict_data` VALUES (14, '000000', 1, '通知', '1', 'sys_notice_type', '', 'warning', 'Y', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '通知');
-INSERT INTO `sys_dict_data` VALUES (15, '000000', 2, '公告', '2', 'sys_notice_type', '', 'success', 'N', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '公告');
-INSERT INTO `sys_dict_data` VALUES (16, '000000', 1, '正常', '0', 'sys_notice_status', '', 'primary', 'Y', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '正常状态');
-INSERT INTO `sys_dict_data` VALUES (17, '000000', 2, '关闭', '1', 'sys_notice_status', '', 'danger', 'N', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '关闭状态');
-INSERT INTO `sys_dict_data` VALUES (18, '000000', 1, '新增', '1', 'sys_oper_type', '', 'info', 'N', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '新增操作');
-INSERT INTO `sys_dict_data` VALUES (19, '000000', 2, '修改', '2', 'sys_oper_type', '', 'info', 'N', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '修改操作');
-INSERT INTO `sys_dict_data` VALUES (20, '000000', 3, '删除', '3', 'sys_oper_type', '', 'danger', 'N', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '删除操作');
-INSERT INTO `sys_dict_data` VALUES (21, '000000', 4, '授权', '4', 'sys_oper_type', '', 'primary', 'N', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '授权操作');
-INSERT INTO `sys_dict_data` VALUES (22, '000000', 5, '导出', '5', 'sys_oper_type', '', 'warning', 'N', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '导出操作');
-INSERT INTO `sys_dict_data` VALUES (23, '000000', 6, '导入', '6', 'sys_oper_type', '', 'warning', 'N', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '导入操作');
-INSERT INTO `sys_dict_data` VALUES (24, '000000', 7, '强退', '7', 'sys_oper_type', '', 'danger', 'N', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '强退操作');
-INSERT INTO `sys_dict_data` VALUES (25, '000000', 8, '生成代码', '8', 'sys_oper_type', '', 'warning', 'N', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '生成操作');
-INSERT INTO `sys_dict_data` VALUES (26, '000000', 9, '清空数据', '9', 'sys_oper_type', '', 'danger', 'N', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '清空操作');
-INSERT INTO `sys_dict_data` VALUES (27, '000000', 1, '成功', '0', 'sys_common_status', '', 'primary', 'N', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '正常状态');
-INSERT INTO `sys_dict_data` VALUES (28, '000000', 2, '失败', '1', 'sys_common_status', '', 'danger', 'N', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '停用状态');
-INSERT INTO `sys_dict_data` VALUES (29, '000000', 99, '其他', '0', 'sys_oper_type', '', 'info', 'N', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '其他操作');
-INSERT INTO `sys_dict_data` VALUES (1775756996568993793, '000000', 1, '免费用户', '0', 'sys_user_grade', '', 'info', 'N', '0', 103, 1, '2024-04-04 13:27:15', 1, '2024-04-04 13:30:09', '');
-INSERT INTO `sys_dict_data` VALUES (1775757116970684418, '000000', 2, '高级会员', '1', 'sys_user_grade', '', 'success', 'N', '0', 103, 1, '2024-04-04 13:27:43', 1, '2024-04-04 13:30:15', '');
-INSERT INTO `sys_dict_data` VALUES (1776109770934677506, '000000', 0, 'token计费', '1', 'sys_model_billing', '', 'primary', 'N', '0', 103, 1, '2024-04-05 12:49:03', 1, '2024-04-21 00:05:41', '');
-INSERT INTO `sys_dict_data` VALUES (1776109853377916929, '000000', 0, '次数计费', '2', 'sys_model_billing', '', 'success', 'N', '0', 103, 1, '2024-04-05 12:49:22', 1, '2024-04-05 12:49:22', '');
-INSERT INTO `sys_dict_data` VALUES (1780264338471858177, '000000', 0, '未支付', '1', 'pay_state', '', 'info', 'N', '0', 103, 1, '2024-04-16 23:57:49', 1, '2024-04-16 23:58:29', '');
-INSERT INTO `sys_dict_data` VALUES (1780264431589601282, '000000', 2, '已支付', '2', 'pay_state', '', 'success', 'N', '0', 103, 1, '2024-04-16 23:58:11', 1, '2024-04-16 23:58:21', '');
+INSERT INTO `sys_dict_data` VALUES (1, '00000', 1, '男', '0', 'sys_user_sex', '', '', 'Y', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '性别男');
+INSERT INTO `sys_dict_data` VALUES (2, '00000', 2, '女', '1', 'sys_user_sex', '', '', 'N', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '性别女');
+INSERT INTO `sys_dict_data` VALUES (3, '00000', 3, '未知', '2', 'sys_user_sex', '', '', 'N', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '性别未知');
+INSERT INTO `sys_dict_data` VALUES (4, '00000', 1, '显示', '0', 'sys_show_hide', '', 'primary', 'Y', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '显示菜单');
+INSERT INTO `sys_dict_data` VALUES (5, '00000', 2, '隐藏', '1', 'sys_show_hide', '', 'danger', 'N', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '隐藏菜单');
+INSERT INTO `sys_dict_data` VALUES (6, '00000', 1, '正常', '0', 'sys_normal_disable', '', 'primary', 'Y', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '正常状态');
+INSERT INTO `sys_dict_data` VALUES (7, '00000', 2, '停用', '1', 'sys_normal_disable', '', 'danger', 'N', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '停用状态');
+INSERT INTO `sys_dict_data` VALUES (12, '00000', 1, '是', 'Y', 'sys_yes_no', '', 'primary', 'Y', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '系统默认是');
+INSERT INTO `sys_dict_data` VALUES (13, '00000', 2, '否', 'N', 'sys_yes_no', '', 'danger', 'N', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '系统默认否');
+INSERT INTO `sys_dict_data` VALUES (14, '00000', 1, '通知', '1', 'sys_notice_type', '', 'warning', 'Y', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '通知');
+INSERT INTO `sys_dict_data` VALUES (15, '00000', 2, '公告', '2', 'sys_notice_type', '', 'success', 'N', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '公告');
+INSERT INTO `sys_dict_data` VALUES (16, '00000', 1, '正常', '0', 'sys_notice_status', '', 'primary', 'Y', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '正常状态');
+INSERT INTO `sys_dict_data` VALUES (17, '00000', 2, '关闭', '1', 'sys_notice_status', '', 'danger', 'N', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '关闭状态');
+INSERT INTO `sys_dict_data` VALUES (18, '00000', 1, '新增', '1', 'sys_oper_type', '', 'info', 'N', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '新增操作');
+INSERT INTO `sys_dict_data` VALUES (19, '00000', 2, '修改', '2', 'sys_oper_type', '', 'info', 'N', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '修改操作');
+INSERT INTO `sys_dict_data` VALUES (20, '00000', 3, '删除', '3', 'sys_oper_type', '', 'danger', 'N', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '删除操作');
+INSERT INTO `sys_dict_data` VALUES (21, '00000', 4, '授权', '4', 'sys_oper_type', '', 'primary', 'N', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '授权操作');
+INSERT INTO `sys_dict_data` VALUES (22, '00000', 5, '导出', '5', 'sys_oper_type', '', 'warning', 'N', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '导出操作');
+INSERT INTO `sys_dict_data` VALUES (23, '00000', 6, '导入', '6', 'sys_oper_type', '', 'warning', 'N', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '导入操作');
+INSERT INTO `sys_dict_data` VALUES (24, '00000', 7, '强退', '7', 'sys_oper_type', '', 'danger', 'N', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '强退操作');
+INSERT INTO `sys_dict_data` VALUES (25, '00000', 8, '生成代码', '8', 'sys_oper_type', '', 'warning', 'N', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '生成操作');
+INSERT INTO `sys_dict_data` VALUES (26, '00000', 9, '清空数据', '9', 'sys_oper_type', '', 'danger', 'N', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '清空操作');
+INSERT INTO `sys_dict_data` VALUES (27, '00000', 1, '成功', '0', 'sys_common_status', '', 'primary', 'N', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '正常状态');
+INSERT INTO `sys_dict_data` VALUES (28, '00000', 2, '失败', '1', 'sys_common_status', '', 'danger', 'N', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '停用状态');
+INSERT INTO `sys_dict_data` VALUES (29, '00000', 99, '其他', '0', 'sys_oper_type', '', 'info', 'N', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '其他操作');
+INSERT INTO `sys_dict_data` VALUES (1775756996568993793, '00000', 1, '免费用户', '0', 'sys_user_grade', '', 'info', 'N', '0', 103, 1, '2024-04-04 13:27:15', 1, '2024-04-04 13:30:09', '');
+INSERT INTO `sys_dict_data` VALUES (1775757116970684418, '00000', 2, '高级会员', '1', 'sys_user_grade', '', 'success', 'N', '0', 103, 1, '2024-04-04 13:27:43', 1, '2024-04-04 13:30:15', '');
+INSERT INTO `sys_dict_data` VALUES (1776109770934677506, '00000', 0, 'token计费', '1', 'sys_model_billing', '', 'primary', 'N', '0', 103, 1, '2024-04-05 12:49:03', 1, '2024-04-21 00:05:41', '');
+INSERT INTO `sys_dict_data` VALUES (1776109853377916929, '00000', 0, '次数计费', '2', 'sys_model_billing', '', 'success', 'N', '0', 103, 1, '2024-04-05 12:49:22', 1, '2024-04-05 12:49:22', '');
+INSERT INTO `sys_dict_data` VALUES (1780264338471858177, '00000', 0, '未支付', '1', 'pay_state', '', 'info', 'N', '0', 103, 1, '2024-04-16 23:57:49', 1, '2024-04-16 23:58:29', '');
+INSERT INTO `sys_dict_data` VALUES (1780264431589601282, '00000', 2, '已支付', '2', 'pay_state', '', 'success', 'N', '0', 103, 1, '2024-04-16 23:58:11', 1, '2024-04-16 23:58:21', '');
 
 -- ----------------------------
 -- Table structure for sys_dict_type
@@ -736,7 +736,7 @@ INSERT INTO `sys_dict_data` VALUES (1780264431589601282, '000000', 2, '已支付
 DROP TABLE IF EXISTS `sys_dict_type`;
 CREATE TABLE `sys_dict_type`  (
   `dict_id` bigint(20) NOT NULL COMMENT '字典主键',
-  `tenant_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '000000' COMMENT '租户编号',
+  `tenant_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '00000' COMMENT '租户编号',
   `dict_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '字典名称',
   `dict_type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '字典类型',
   `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '状态（0正常 1停用）',
@@ -753,14 +753,14 @@ CREATE TABLE `sys_dict_type`  (
 -- ----------------------------
 -- Records of sys_dict_type
 -- ----------------------------
-INSERT INTO `sys_dict_type` VALUES (1, '000000', '用户性别', 'sys_user_sex', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '用户性别列表');
-INSERT INTO `sys_dict_type` VALUES (2, '000000', '菜单状态', 'sys_show_hide', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '菜单状态列表');
-INSERT INTO `sys_dict_type` VALUES (3, '000000', '系统开关', 'sys_normal_disable', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '系统开关列表');
-INSERT INTO `sys_dict_type` VALUES (6, '000000', '系统是否', 'sys_yes_no', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '系统是否列表');
-INSERT INTO `sys_dict_type` VALUES (7, '000000', '通知类型', 'sys_notice_type', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '通知类型列表');
-INSERT INTO `sys_dict_type` VALUES (8, '000000', '通知状态', 'sys_notice_status', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '通知状态列表');
-INSERT INTO `sys_dict_type` VALUES (9, '000000', '操作类型', 'sys_oper_type', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '操作类型列表');
-INSERT INTO `sys_dict_type` VALUES (10, '000000', '系统状态', 'sys_common_status', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '登录状态列表');
+INSERT INTO `sys_dict_type` VALUES (1, '00000', '用户性别', 'sys_user_sex', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '用户性别列表');
+INSERT INTO `sys_dict_type` VALUES (2, '00000', '菜单状态', 'sys_show_hide', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '菜单状态列表');
+INSERT INTO `sys_dict_type` VALUES (3, '00000', '系统开关', 'sys_normal_disable', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '系统开关列表');
+INSERT INTO `sys_dict_type` VALUES (6, '00000', '系统是否', 'sys_yes_no', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '系统是否列表');
+INSERT INTO `sys_dict_type` VALUES (7, '00000', '通知类型', 'sys_notice_type', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '通知类型列表');
+INSERT INTO `sys_dict_type` VALUES (8, '00000', '通知状态', 'sys_notice_status', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '通知状态列表');
+INSERT INTO `sys_dict_type` VALUES (9, '00000', '操作类型', 'sys_oper_type', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '操作类型列表');
+INSERT INTO `sys_dict_type` VALUES (10, '00000', '系统状态', 'sys_common_status', '0', 103, 1, '2023-05-14 15:19:41', NULL, NULL, '登录状态列表');
 INSERT INTO `sys_dict_type` VALUES (1729685494468083714, '911866', '用户性别', 'sys_user_sex', '0', 103, 1, '2023-05-14 15:19:41', 1, '2023-05-14 15:19:41', '用户性别列表');
 INSERT INTO `sys_dict_type` VALUES (1729685494468083715, '911866', '菜单状态', 'sys_show_hide', '0', 103, 1, '2023-05-14 15:19:41', 1, '2023-05-14 15:19:41', '菜单状态列表');
 INSERT INTO `sys_dict_type` VALUES (1729685494468083716, '911866', '系统开关', 'sys_normal_disable', '0', 103, 1, '2023-05-14 15:19:41', 1, '2023-05-14 15:19:41', '系统开关列表');
@@ -769,12 +769,12 @@ INSERT INTO `sys_dict_type` VALUES (1729685494468083718, '911866', '通知类型
 INSERT INTO `sys_dict_type` VALUES (1729685494468083719, '911866', '通知状态', 'sys_notice_status', '0', 103, 1, '2023-05-14 15:19:41', 1, '2023-05-14 15:19:41', '通知状态列表');
 INSERT INTO `sys_dict_type` VALUES (1729685494468083720, '911866', '操作类型', 'sys_oper_type', '0', 103, 1, '2023-05-14 15:19:41', 1, '2023-05-14 15:19:41', '操作类型列表');
 INSERT INTO `sys_dict_type` VALUES (1729685494468083721, '911866', '系统状态', 'sys_common_status', '0', 103, 1, '2023-05-14 15:19:41', 1, '2023-05-14 15:19:41', '登录状态列表');
-INSERT INTO `sys_dict_type` VALUES (1775756736895438849, '000000', '用户等级', 'sys_user_grade', '0', 103, 1, '2024-04-04 13:26:13', 1, '2024-04-04 13:26:13', '');
-INSERT INTO `sys_dict_type` VALUES (1776109665045278721, '000000', '模型计费方式', 'sys_model_billing', '0', 103, 1, '2024-04-05 12:48:37', 1, '2024-04-08 11:22:18', '模型计费方式');
-INSERT INTO `sys_dict_type` VALUES (1780263881368219649, '000000', '支付状态', 'pay_state', '0', 103, 1, '2024-04-16 23:56:00', 1, '2025-03-29 15:21:57', '支付状态');
-INSERT INTO `sys_dict_type` VALUES (1904565568803217409, '000000', '状态类型', 'status_type', '0', 103, 1, '2025-03-26 00:06:31', 1, '2025-03-26 00:06:31', NULL);
-INSERT INTO `sys_dict_type` VALUES (1904753371814076417, '000000', '222', 'sadffasd', '0', 103, 1, '2025-03-26 12:32:47', 1, '2025-03-26 12:32:47', '34444');
-INSERT INTO `sys_dict_type` VALUES (1905807388002525185, '000000', '11', 'ee', '0', 103, 1, '2025-03-29 10:21:04', 1, '2025-03-29 10:21:04', '11');
+INSERT INTO `sys_dict_type` VALUES (1775756736895438849, '00000', '用户等级', 'sys_user_grade', '0', 103, 1, '2024-04-04 13:26:13', 1, '2024-04-04 13:26:13', '');
+INSERT INTO `sys_dict_type` VALUES (1776109665045278721, '00000', '模型计费方式', 'sys_model_billing', '0', 103, 1, '2024-04-05 12:48:37', 1, '2024-04-08 11:22:18', '模型计费方式');
+INSERT INTO `sys_dict_type` VALUES (1780263881368219649, '00000', '支付状态', 'pay_state', '0', 103, 1, '2024-04-16 23:56:00', 1, '2025-03-29 15:21:57', '支付状态');
+INSERT INTO `sys_dict_type` VALUES (1904565568803217409, '00000', '状态类型', 'status_type', '0', 103, 1, '2025-03-26 00:06:31', 1, '2025-03-26 00:06:31', NULL);
+INSERT INTO `sys_dict_type` VALUES (1904753371814076417, '00000', '222', 'sadffasd', '0', 103, 1, '2025-03-26 12:32:47', 1, '2025-03-26 12:32:47', '34444');
+INSERT INTO `sys_dict_type` VALUES (1905807388002525185, '00000', '11', 'ee', '0', 103, 1, '2025-03-29 10:21:04', 1, '2025-03-29 10:21:04', '11');
 
 -- ----------------------------
 -- Table structure for sys_file_info
@@ -815,7 +815,7 @@ CREATE TABLE `sys_file_info`  (
 DROP TABLE IF EXISTS `sys_logininfor`;
 CREATE TABLE `sys_logininfor`  (
   `info_id` bigint(20) NOT NULL COMMENT '访问ID',
-  `tenant_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '000000' COMMENT '租户编号',
+  `tenant_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '00000' COMMENT '租户编号',
   `user_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '用户账号',
   `ipaddr` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '登录IP地址',
   `login_location` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '登录地点',
@@ -989,7 +989,7 @@ INSERT INTO `sys_menu` VALUES (1906674838461321222, '配置信息导出', 190667
 DROP TABLE IF EXISTS `sys_notice`;
 CREATE TABLE `sys_notice`  (
   `notice_id` bigint(20) NOT NULL COMMENT '公告ID',
-  `tenant_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '000000' COMMENT '租户编号',
+  `tenant_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '00000' COMMENT '租户编号',
   `notice_title` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '公告标题',
   `notice_type` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '公告类型（1通知 2公告）',
   `notice_content` longblob NULL COMMENT '公告内容',
@@ -1006,7 +1006,7 @@ CREATE TABLE `sys_notice`  (
 -- ----------------------------
 -- Records of sys_notice
 -- ----------------------------
-INSERT INTO `sys_notice` VALUES (1789324923280932865, '000000', '公告', '1', 0x3C703E3C7374726F6E67207374796C653D22636F6C6F723A20236666393930303B223EE69CACE7BD91E7AB99E4B88EE4BBBBE4BD95E585B6E4BB96E585ACE58FB8E68896E59586E6A087E6B2A1E69C89E4BBBBE4BD95E585B3E88194E68896E59088E4BD9CE585B3E7B3BB3C2F7374726F6E673E3C2F703E0A3C703E3C7370616E207374796C653D22636F6C6F723A20236536303030303B223E4149E4B99FE4BC9AE78AAFE99499E38082E8AFB7E58BBFE5B086E585B6E794A8E4BA8EE9878DE8A681E79BAEE79A843C2F7370616E3E3C2F703E0A3C703E3C7370616E207374796C653D22636F6C6F723A20236666393930303B223EE68891E4BBACE79BAEE5898DE6ADA3E59CA8E4BFAEE5A48DE68891E4BBACE7BD91E7AB99E4B88AE79A84E99499E8AFAFE5B9B6E694B9E8BF9BE7BB86E88A82E38082E5A682E69E9CE682A8E69C89E4BBBBE4BD95E79691E997AEEFBC8CE8AFB7E9809AE8BF87E4BBA5E4B88BE696B9E5BC8FE88194E7B3BBE68891E4BBACEFBC9A61676565726C65403136332E636F6D313434343434353535353C2F7370616E3E3C2F703E0A3C703E266E6273703B3C2F703E, '0', 103, 1, '2024-05-12 00:01:20', 1, '2025-03-11 19:31:59', '');
+INSERT INTO `sys_notice` VALUES (1789324923280932865, '00000', '公告', '1', 0x3C703E3C7374726F6E67207374796C653D22636F6C6F723A20236666393930303B223EE69CACE7BD91E7AB99E4B88EE4BBBBE4BD95E585B6E4BB96E585ACE58FB8E68896E59586E6A087E6B2A1E69C89E4BBBBE4BD95E585B3E88194E68896E59088E4BD9CE585B3E7B3BB3C2F7374726F6E673E3C2F703E0A3C703E3C7370616E207374796C653D22636F6C6F723A20236536303030303B223E4149E4B99FE4BC9AE78AAFE99499E38082E8AFB7E58BBFE5B086E585B6E794A8E4BA8EE9878DE8A681E79BAEE79A843C2F7370616E3E3C2F703E0A3C703E3C7370616E207374796C653D22636F6C6F723A20236666393930303B223EE68891E4BBACE79BAEE5898DE6ADA3E59CA8E4BFAEE5A48DE68891E4BBACE7BD91E7AB99E4B88AE79A84E99499E8AFAFE5B9B6E694B9E8BF9BE7BB86E88A82E38082E5A682E69E9CE682A8E69C89E4BBBBE4BD95E79691E997AEEFBC8CE8AFB7E9809AE8BF87E4BBA5E4B88BE696B9E5BC8FE88194E7B3BBE68891E4BBACEFBC9A61676565726C65403136332E636F6D313434343434353535353C2F7370616E3E3C2F703E0A3C703E266E6273703B3C2F703E, '0', 103, 1, '2024-05-12 00:01:20', 1, '2025-03-11 19:31:59', '');
 
 -- ----------------------------
 -- Table structure for sys_notice_state
@@ -1036,7 +1036,7 @@ CREATE TABLE `sys_notice_state`  (
 DROP TABLE IF EXISTS `sys_oper_log`;
 CREATE TABLE `sys_oper_log`  (
   `oper_id` bigint(20) NOT NULL COMMENT '日志主键',
-  `tenant_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '000000' COMMENT '租户编号',
+  `tenant_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '00000' COMMENT '租户编号',
   `title` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '模块标题',
   `business_type` int(2) NULL DEFAULT 0 COMMENT '业务类型（0其它 1新增 2修改 3删除）',
   `method` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '方法名称',
@@ -1085,7 +1085,7 @@ INSERT INTO `sys_oper_log` VALUES (1906679257265422337, '00000', '菜单管理',
 DROP TABLE IF EXISTS `sys_oss`;
 CREATE TABLE `sys_oss`  (
   `oss_id` bigint(20) NOT NULL COMMENT '对象存储主键',
-  `tenant_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '000000' COMMENT '租户编号',
+  `tenant_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '00000' COMMENT '租户编号',
   `file_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '文件名',
   `original_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '原名',
   `file_suffix` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '文件后缀名',
@@ -1109,7 +1109,7 @@ CREATE TABLE `sys_oss`  (
 DROP TABLE IF EXISTS `sys_oss_config`;
 CREATE TABLE `sys_oss_config`  (
   `oss_config_id` bigint(20) NOT NULL COMMENT '主建',
-  `tenant_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '000000' COMMENT '租户编号',
+  `tenant_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '00000' COMMENT '租户编号',
   `config_key` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '配置key',
   `access_key` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT 'accessKey',
   `secret_key` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '秘钥',
@@ -1134,10 +1134,10 @@ CREATE TABLE `sys_oss_config`  (
 -- ----------------------------
 -- Records of sys_oss_config
 -- ----------------------------
-INSERT INTO `sys_oss_config` VALUES (1, '000000', 'minio', 'ruoyi', 'ruoyi123', 'ruoyi', '', '127.0.0.1:9000', '', 'N', '', '1', '1', '', 103, 1, '2023-05-14 15:19:42', 1, '2025-03-26 16:25:55', NULL);
-INSERT INTO `sys_oss_config` VALUES (2, '000000', 'qiniu', 'ruoyi', 'ruoyi123', 'ruoyi', '', 's3-cn-north-1.qiniucs.com', '', 'N', '', '1', '0', '', 103, 1, '2023-05-14 15:19:42', 1, '2025-03-26 19:44:56', NULL);
-INSERT INTO `sys_oss_config` VALUES (3, '000000', 'aliyun', 'ruoyi', 'ruoyi123', 'ruoyi', '', 'oss-cn-beijing.aliyuncs.com', '', 'N', '', '1', '1', '', 103, 1, '2023-05-14 15:19:42', 1, '2025-03-13 13:13:04', NULL);
-INSERT INTO `sys_oss_config` VALUES (4, '000000', 'qcloud', 'ruoyi', 'ruoyi123', 'ruoyi', 'panda', 'cos.ap-guangzhou.myqcloud.com', '', 'N', 'ap-guangzhou', '1', '1', '', 103, 1, '2023-05-14 15:19:42', 1, '2025-03-26 09:23:26', '');
+INSERT INTO `sys_oss_config` VALUES (1, '00000', 'minio', 'ruoyi', 'ruoyi123', 'ruoyi', '', '127.0.0.1:9000', '', 'N', '', '1', '1', '', 103, 1, '2023-05-14 15:19:42', 1, '2025-03-26 16:25:55', NULL);
+INSERT INTO `sys_oss_config` VALUES (2, '00000', 'qiniu', 'ruoyi', 'ruoyi123', 'ruoyi', '', 's3-cn-north-1.qiniucs.com', '', 'N', '', '1', '0', '', 103, 1, '2023-05-14 15:19:42', 1, '2025-03-26 19:44:56', NULL);
+INSERT INTO `sys_oss_config` VALUES (3, '00000', 'aliyun', 'ruoyi', 'ruoyi123', 'ruoyi', '', 'oss-cn-beijing.aliyuncs.com', '', 'N', '', '1', '1', '', 103, 1, '2023-05-14 15:19:42', 1, '2025-03-13 13:13:04', NULL);
+INSERT INTO `sys_oss_config` VALUES (4, '00000', 'qcloud', 'ruoyi', 'ruoyi123', 'ruoyi', 'panda', 'cos.ap-guangzhou.myqcloud.com', '', 'N', 'ap-guangzhou', '1', '1', '', 103, 1, '2023-05-14 15:19:42', 1, '2025-03-26 09:23:26', '');
 
 -- ----------------------------
 -- Table structure for sys_post
@@ -1145,7 +1145,7 @@ INSERT INTO `sys_oss_config` VALUES (4, '000000', 'qcloud', 'ruoyi', 'ruoyi123',
 DROP TABLE IF EXISTS `sys_post`;
 CREATE TABLE `sys_post`  (
   `post_id` bigint(20) NOT NULL COMMENT '岗位ID',
-  `tenant_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '000000' COMMENT '租户编号',
+  `tenant_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '00000' COMMENT '租户编号',
   `post_code` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '岗位编码',
   `post_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '岗位名称',
   `post_sort` int(4) NOT NULL COMMENT '显示顺序',
@@ -1162,10 +1162,10 @@ CREATE TABLE `sys_post`  (
 -- ----------------------------
 -- Records of sys_post
 -- ----------------------------
-INSERT INTO `sys_post` VALUES (1, '000000', 'ceo', '董事长', 1, '0', 103, 1, '2023-05-14 15:19:39', NULL, NULL, '');
-INSERT INTO `sys_post` VALUES (2, '000000', 'se', '项目经理', 2, '0', 103, 1, '2023-05-14 15:19:39', NULL, NULL, '');
-INSERT INTO `sys_post` VALUES (3, '000000', 'hr', '人力资源', 3, '0', 103, 1, '2023-05-14 15:19:39', NULL, NULL, '');
-INSERT INTO `sys_post` VALUES (4, '000000', 'user', '普通员工', 4, '0', 103, 1, '2023-05-14 15:19:39', NULL, NULL, '');
+INSERT INTO `sys_post` VALUES (1, '00000', 'ceo', '董事长', 1, '0', 103, 1, '2023-05-14 15:19:39', NULL, NULL, '');
+INSERT INTO `sys_post` VALUES (2, '00000', 'se', '项目经理', 2, '0', 103, 1, '2023-05-14 15:19:39', NULL, NULL, '');
+INSERT INTO `sys_post` VALUES (3, '00000', 'hr', '人力资源', 3, '0', 103, 1, '2023-05-14 15:19:39', NULL, NULL, '');
+INSERT INTO `sys_post` VALUES (4, '00000', 'user', '普通员工', 4, '0', 103, 1, '2023-05-14 15:19:39', NULL, NULL, '');
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -1173,7 +1173,7 @@ INSERT INTO `sys_post` VALUES (4, '000000', 'user', '普通员工', 4, '0', 103,
 DROP TABLE IF EXISTS `sys_role`;
 CREATE TABLE `sys_role`  (
   `role_id` bigint(20) NOT NULL COMMENT '角色ID',
-  `tenant_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '000000' COMMENT '租户编号',
+  `tenant_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '00000' COMMENT '租户编号',
   `role_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '角色名称',
   `role_key` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '角色权限字符串',
   `role_sort` int(4) NOT NULL COMMENT '显示顺序',
@@ -1194,11 +1194,11 @@ CREATE TABLE `sys_role`  (
 -- ----------------------------
 -- Records of sys_role
 -- ----------------------------
-INSERT INTO `sys_role` VALUES (1, '000000', '超级管理员', 'superadmin', 1, '1', 1, 1, '0', '0', 103, 1, '2023-05-14 15:19:39', NULL, NULL, '超级管理员');
-INSERT INTO `sys_role` VALUES (2, '000000', '普通角色', 'common', 2, '2', 0, 1, '0', '0', 103, 1, '2023-05-14 15:19:39', 1, '2025-03-31 19:41:35', '普通角色');
-INSERT INTO `sys_role` VALUES (3, '000000', '本部门及以下', 'test1', 3, '4', 1, 1, '0', '0', 103, 1, '2023-05-14 15:20:00', 1, '2025-03-17 09:29:25', NULL);
-INSERT INTO `sys_role` VALUES (4, '000000', '仅本人', 'test2', 4, '5', 1, 1, '0', '0', 103, 1, '2023-05-14 15:20:00', 1, '2025-03-24 10:56:45', NULL);
-INSERT INTO `sys_role` VALUES (1661661183933177857, '000000', '小程序管理员', 'xcxadmin', 1, '1', 1, 1, '0', '0', 103, 1, '2023-05-25 17:11:13', 1, '2025-03-31 19:45:38', '');
+INSERT INTO `sys_role` VALUES (1, '00000', '超级管理员', 'superadmin', 1, '1', 1, 1, '0', '0', 103, 1, '2023-05-14 15:19:39', NULL, NULL, '超级管理员');
+INSERT INTO `sys_role` VALUES (2, '00000', '普通角色', 'common', 2, '2', 0, 1, '0', '0', 103, 1, '2023-05-14 15:19:39', 1, '2025-03-31 19:41:35', '普通角色');
+INSERT INTO `sys_role` VALUES (3, '00000', '本部门及以下', 'test1', 3, '4', 1, 1, '0', '0', 103, 1, '2023-05-14 15:20:00', 1, '2025-03-17 09:29:25', NULL);
+INSERT INTO `sys_role` VALUES (4, '00000', '仅本人', 'test2', 4, '5', 1, 1, '0', '0', 103, 1, '2023-05-14 15:20:00', 1, '2025-03-24 10:56:45', NULL);
+INSERT INTO `sys_role` VALUES (1661661183933177857, '00000', '小程序管理员', 'xcxadmin', 1, '1', 1, 1, '0', '0', 103, 1, '2023-05-25 17:11:13', 1, '2025-03-31 19:45:38', '');
 INSERT INTO `sys_role` VALUES (1729685491108446210, '911866', '管理员', 'admin', 4, '1', 1, 1, '0', '0', 103, 1, '2023-11-29 10:15:32', 1, '2025-03-26 18:25:07', NULL);
 
 -- ----------------------------
@@ -1588,7 +1588,7 @@ CREATE TABLE `sys_tenant`  (
 -- ----------------------------
 -- Records of sys_tenant
 -- ----------------------------
-INSERT INTO `sys_tenant` VALUES (1, '000000', '管理组', '15888888888', 'XXX有限公司', NULL, NULL, '多租户通用后台管理管理系统', NULL, NULL, NULL, NULL, -1, '0', '0', 103, 1, '2023-05-14 15:19:39', NULL, NULL);
+INSERT INTO `sys_tenant` VALUES (1, '00000', '管理组', '15888888888', 'XXX有限公司', NULL, NULL, '多租户通用后台管理管理系统', NULL, NULL, NULL, NULL, -1, '0', '0', 103, 1, '2023-05-14 15:19:39', NULL, NULL);
 INSERT INTO `sys_tenant` VALUES (1729685490647072769, '911866', '测试', '11111111111', '5126', '', '', '', '', '', 1729685389795033090, NULL, 1, '0', '2', 103, 1, '2023-11-29 10:15:32', 1, '2023-11-29 10:15:32');
 
 -- ----------------------------
@@ -1625,7 +1625,7 @@ CREATE TABLE `sys_user`  (
   `open_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '微信用户标识',
   `user_grade` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '用户等级',
   `user_balance` double(20, 2) NULL DEFAULT 0.00 COMMENT '账户余额',
-  `tenant_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '000000' COMMENT '租户编号',
+  `tenant_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '00000' COMMENT '租户编号',
   `dept_id` bigint(20) NULL DEFAULT NULL COMMENT '部门ID',
   `user_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户账号',
   `nick_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户昵称',
@@ -1658,8 +1658,8 @@ INSERT INTO `sys_user` VALUES (1, NULL, '1', 100.00, '00000', 103, 'admin', '111
 INSERT INTO `sys_user` VALUES (1714176194496339970, NULL, '1', 88.88, '00000', NULL, 'pandarobot@163.com', '问答助手', 'sys_user', 'Free', '', '', '0', 'http://panda-1253683406.cos.ap-guangzhou.myqcloud.com/panda/2024/04/28/346796f5c32744c1987bf28d5820325b.jpg', NULL, '$2a$10$u3LIdNBg6kM3iYqHFJe2IOWCMbT2h5NUI.CeXlF5dyBGcy3nwW836', '1', '2', '127.0.0.1', '2025-03-05 17:18:42', NULL, 103, 1713440206715650049, '2023-10-17 15:07:07', 1714176194496339970, '2025-03-05 17:18:42', NULL);
 INSERT INTO `sys_user` VALUES (1898270044544028674, NULL, '1', 1.00, '00000', NULL, '1150039659@qq.com', '1150039659@qq.com', 'sys_user', 'Free', '', '', '0', NULL, NULL, '$2a$10$Mw9T.kzBuYqvT14ZDP2VoORLU9WMWdaT/iatJxEtCQCZoBYBNmKw6', '0', '2', '127.0.0.1', '2025-03-09 23:01:03', '192.168.20.162', NULL, NULL, '2025-03-08 15:10:21', 1898270044544028674, '2025-03-09 23:01:03', NULL);
 INSERT INTO `sys_user` VALUES (1898283021590552578, NULL, '0', 1.00, '00000', NULL, '1434841024@qq.com', '1434841024@qq.com', 'sys_user', 'Free', '', '', '0', NULL, NULL, '$2a$10$R6rClsJdJK5Ovhp14Xc0w.IITFBDyocgxWqsJ9SS7AhWW6.vCKiAa', '0', '2', '192.168.20.161', '2025-03-08 17:04:37', '127.0.0.1', NULL, NULL, '2025-03-08 16:01:55', 1898283021590552578, '2025-03-08 17:04:37', NULL);
-INSERT INTO `sys_user` VALUES (1904371025403224065, NULL, '1', 999999999.00, '000000', 103, 'dddd', 'dddd', 'sys_user', 'Free', '', '', '0', NULL, NULL, '$2a$10$y0IYGL1MY5rvTUEl9Pjg4uIVMpbwwuzIl.8nH2Ie3uK2A9EJor0VK', '1', '2', '127.0.0.1', '2025-03-25 11:15:16', NULL, 103, 1, '2025-03-25 11:13:29', 1904371025403224065, '2025-03-25 11:15:16', NULL);
-INSERT INTO `sys_user` VALUES (1905928435494330370, NULL, '0', 100.00, '000000', 103, '熊猫助手', '熊猫助手', 'sys_user', 'Free', 'iii@g545.bo', '', '0', NULL, NULL, '$2a$10$8WO.FFcmu4L/DhzpfM4rbee0HRK6gIYIs2KsRXkc4ckjudbzchvPi', '0', '2', '', NULL, NULL, 103, 1, '2025-03-29 18:22:04', 1, '2025-03-31 10:15:11', NULL);
+INSERT INTO `sys_user` VALUES (1904371025403224065, NULL, '1', 999999999.00, '00000', 103, 'dddd', 'dddd', 'sys_user', 'Free', '', '', '0', NULL, NULL, '$2a$10$y0IYGL1MY5rvTUEl9Pjg4uIVMpbwwuzIl.8nH2Ie3uK2A9EJor0VK', '1', '2', '127.0.0.1', '2025-03-25 11:15:16', NULL, 103, 1, '2025-03-25 11:13:29', 1904371025403224065, '2025-03-25 11:15:16', NULL);
+INSERT INTO `sys_user` VALUES (1905928435494330370, NULL, '0', 100.00, '00000', 103, '熊猫助手', '熊猫助手', 'sys_user', 'Free', 'iii@g545.bo', '', '0', NULL, NULL, '$2a$10$8WO.FFcmu4L/DhzpfM4rbee0HRK6gIYIs2KsRXkc4ckjudbzchvPi', '0', '2', '', NULL, NULL, 103, 1, '2025-03-29 18:22:04', 1, '2025-03-31 10:15:11', NULL);
 
 -- ----------------------------
 -- Table structure for sys_user_post

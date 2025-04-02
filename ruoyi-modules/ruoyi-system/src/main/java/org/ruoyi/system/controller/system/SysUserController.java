@@ -27,6 +27,7 @@ import org.ruoyi.system.domain.request.UserRequest;
 import org.ruoyi.system.domain.vo.*;
 import org.ruoyi.system.listener.SysUserImportListener;
 import org.ruoyi.system.service.*;
+import org.springframework.boot.context.properties.PropertyMapper;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +35,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -171,6 +173,7 @@ public class SysUserController extends BaseController {
         } else if (StringUtils.isNotEmpty(user.getEmail()) && !userService.checkEmailUnique(user)) {
             return R.fail("新增用户'" + user.getUserName() + "'失败，邮箱账号已存在");
         }
+
         if (TenantHelper.isEnable()) {
             if (!tenantService.checkAccountBalance(TenantHelper.getTenantId())) {
                 return R.fail("当前租户下用户名额不足，请联系管理员");
@@ -182,7 +185,9 @@ public class SysUserController extends BaseController {
         if(StringUtils.isEmpty(user.getNickName())){
             user.setNickName(user.getUserName());
         }
-        user.setDeptId(103L);
+        if (Objects.isNull(user.getDeptId())){
+            user.setDeptId(103L);
+        }
         user.setPassword(BCrypt.hashpw(user.getPassword()));
         return toAjax(userService.insertUser(user));
     }

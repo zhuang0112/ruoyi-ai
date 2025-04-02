@@ -18,6 +18,20 @@
 
     <dependencies>
 
+        <!--解决：Unable to load io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider-->
+        <!-- https://mvnrepository.com/artifact/io.netty/netty-resolver-dns-native-macos -->
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-resolver-dns-native-macos</artifactId>
+            <version>4.2.0.RC3</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-resolver-dns-native-macos</artifactId>
+            <classifier>osx-aarch_64</classifier>
+        </dependency>
+
         <!-- Mysql驱动包 -->
         <dependency>
             <groupId>com.mysql</groupId>
@@ -60,6 +74,18 @@
         <dependency>
             <groupId>org.ruoyi</groupId>
             <artifactId>ruoyi-knowledge</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>jsqlparser</artifactId>
+                    <groupId>com.github.jsqlparser</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <artifactId>jsqlparser</artifactId>
+            <groupId>com.github.jsqlparser</groupId>
+            <version>4.4</version>
         </dependency>
 
         <dependency>

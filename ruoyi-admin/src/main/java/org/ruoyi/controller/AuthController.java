@@ -92,6 +92,7 @@ public class AuthController {
         // 生成令牌
         String token = loginService.smsLogin(body.getTenantId(), body.getPhonenumber(), body.getSmsCode());
         loginVo.setToken(token);
+        loginVo.setAccess_token(token);
         return R.ok(loginVo);
     }
 

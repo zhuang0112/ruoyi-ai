@@ -1,11 +1,13 @@
 package org.ruoyi.system.service.impl;
 
 import cn.hutool.core.convert.Convert;
+import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.zhuang.storage.strategy.context.StorageStrategyContext;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.ruoyi.common.core.constant.CacheNames;
@@ -28,6 +30,7 @@ import org.ruoyi.system.domain.vo.SysOssVo;
 import org.ruoyi.system.mapper.SysOssMapper;
 import org.ruoyi.system.service.ISysOssService;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -49,6 +52,7 @@ import java.util.Map;
 public class SysOssServiceImpl implements ISysOssService, OssService {
 
     private final SysOssMapper baseMapper;
+    private final StorageStrategyContext strategyContext;
 
     @Override
     public TableDataInfo<SysOssVo> queryPageList(SysOssBo bo, PageQuery pageQuery) {
@@ -123,25 +127,27 @@ public class SysOssServiceImpl implements ISysOssService, OssService {
 
     @Override
     public SysOssVo upload(MultipartFile file) {
+        String url = strategyContext.executeUploadStrategy(file, "minio");
         String originalfileName = file.getOriginalFilename();
         String suffix = StringUtils.substring(originalfileName, originalfileName.lastIndexOf("."), originalfileName.length());
-        OssClient storage = OssFactory.instance();
-        UploadResult uploadResult;
-        try {
-            uploadResult = storage.uploadSuffix(file.getBytes(), suffix, file.getContentType());
-        } catch (IOException e) {
-            throw new ServiceException(e.getMessage());
-        }
+        // OssClient storage = OssFactory.instance();
+        // UploadResult uploadResult;
+        // try {
+        //     uploadResult = storage.uploadSuffix(file.getBytes(), suffix, file.getContentType());
+        // } catch (IOException e) {
+        //     throw new ServiceException(e.getMessage());
+        // }
         // 保存文件信息
         SysOss oss = new SysOss();
-        oss.setUrl(uploadResult.getUrl());
+        oss.setUrl(url);
         oss.setFileSuffix(suffix);
-        oss.setFileName(uploadResult.getFilename());
+        oss.setFileName(FileUtil.getName(originalfileName));
         oss.setOriginalName(originalfileName);
-        oss.setService(storage.getConfigKey());
+        oss.setService("minio");
         baseMapper.insert(oss);
         SysOssVo sysOssVo = MapstructUtils.convert(oss, SysOssVo.class);
-        return this.matchingUrl(sysOssVo);
+        // return this.matchingUrl(sysOssVo);
+        return sysOssVo;
     }
 
     @Override

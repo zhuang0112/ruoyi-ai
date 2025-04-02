@@ -50,7 +50,7 @@ server:
 logging:
   level:
     org.ruoyi: @logging.level@
-    org.springframework: warn
+    org.springframework: info
   config: classpath:logback-plus.xml
 
 # 用户配置
@@ -318,5 +318,43 @@ wechat:
         token:   ''
         aesKey: ''
 
-
+store:
+  minio:
+    enable: true
+    server-name: minio
+    domain-url: http://127.0.0.1:9090
+    access-key: minioadmin
+    access-key-secret: minioadmin
+    endpoint: http://127.0.0.1:9090
+    bucket: mrzhuang
+  oss:
+    domain-url: https://edu-zhuang.oss-cn-beijing.aliyuncs.com/
+    access-key: LTAI5t87MgtCcFHkCkeJgZxj
+    access-key-secret: 754P0kON7PMcyVw7yONBlmMQfTNEqb
+    endpoint: https://oss-cn-beijing.aliyuncs.com/
+    bucket: edu-zhuang
+  cos:
+    domain-url: https://mrzhuang-1316470786.cos.ap-nanjing.myqcloud.com/
+    access-key: AKIDGNGvNbbO0OXSBgx0oQnw3xf9PRN6bsuj
+    access-key-secret: iCTXP2SejcHiuufCZimcFeomW2JOHwMl
+    endpoint: cos.ap-nanjing
+    bucket: mrzhuang-1316470786
+  kodo:
+    domain-url: null
+    access-key: MEHq5RBvFFddukKRG2L4fyl73sGUU-uGbBKP3y3-
+    access-key-secret: Ch-u1KRzKIEHNhkmJhmNTvqR_-HajVIqSm2ZeC0B
+    endpoint: null
+    bucket: nnull
+  s3:
+    domain-url: http://122.51.163.127:9001
+    access-key: minioadmin
+    access-key-secret: minioadmin
+    endpoint: http://122.51.163.127:9001
+    bucket: mrzhuang
+  local:
+    domain-url: null
+    access-key: null
+    access-key-secret: null
+    endpoint: null
+    bucket: null
 
