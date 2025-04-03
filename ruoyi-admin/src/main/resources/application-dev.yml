@@ -87,12 +87,12 @@ redisson:
 
 --- # sms 短信
 sms:
-  enabled: false
+  enabled: true
   # 阿里云 dysmsapi.aliyuncs.com
   # 腾讯云 sms.tencentcloudapi.com
   endpoint: "dysmsapi.aliyuncs.com"
-  accessKeyId: xxxxxxx
-  accessKeySecret: xxxxxx
-  signName: 测试
+  accessKeyId: LTAI5tK4wy6QsmEyRfpb7TZX
+  accessKeySecret: shaI3a5Z3sDI88rLGut5RwTw61vgJ2
+  signName: 阿里云短信测试
   # 腾讯专用
   sdkAppId:
