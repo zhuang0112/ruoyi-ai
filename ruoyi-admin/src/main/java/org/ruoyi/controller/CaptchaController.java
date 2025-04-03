@@ -68,7 +68,7 @@ public class CaptchaController {
         String code = RandomUtil.randomNumbers(4);
         RedisUtils.setCacheObject(key, code, Duration.ofMinutes(Constants.CAPTCHA_EXPIRATION));
         // 验证码模板id 自行处理 (查数据库或写死均可)
-        String templateId = "SMS_154950909";
+        String templateId = "";
         Map<String, String> map = new HashMap<>(1);
         map.put("code", code);
         SmsTemplate smsTemplate = SpringUtils.getBean(SmsTemplate.class);
