@@ -25,14 +25,17 @@
         <dependency>
             <groupId>com.aliyun</groupId>
             <artifactId>dysmsapi20170525</artifactId>
-            <optional>true</optional>
+            <!--设置false时，或者去除optinal标签时，将此依赖加载到项目中-->
+            <optional>false</optional>
         </dependency>
 
         <dependency>
             <groupId>com.tencentcloudapi</groupId>
             <artifactId>tencentcloud-sdk-java-sms</artifactId>
+            <!--设置为true时，此依赖不会被引入到项目中，可以配合@ConditionalOnClass使用-->
             <optional>true</optional>
         </dependency>
+
     </dependencies>
 
 </project>

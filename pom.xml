@@ -48,8 +48,8 @@
         <!-- OSS 配置 -->
         <aws-java-sdk-s3.version>1.12.400</aws-java-sdk-s3.version>
         <!-- SMS 配置 -->
-        <aliyun.sms.version>2.0.23</aliyun.sms.version>
-        <tencent.sms.version>3.1.687</tencent.sms.version>
+        <aliyun.sms.version>3.0.0</aliyun.sms.version>
+        <tencent.sms.version>3.1.1179</tencent.sms.version>
 
         <!-- 插件版本 -->
         <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version>
