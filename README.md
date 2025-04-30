@@ -63,17 +63,18 @@
   用户名: admin 密码：admin123
 
 ### 源码地址
-[1]github
-- 前端服务-用户端: https://github.com/ageerle/ruoyi-web
-- 前端服务-管理端: https://github.com/ageerle/ruoyi-admin
-- 前端服务-小程序端: https://github.com/ageerle/ruoyi-uniapp
-- 后端服务：https://github.com/ageerle/ruoyi-ai
 
-[2]gitee
+[1]gitee
 - 前端服务-用户端: https://gitee.com/ageerle/ruoyi-web
 - 前端服务-管理端: https://gitee.com/ageerle/ruoyi-admin
 - 前端服务-小程序端: https://gitee.com/ageerle/ruoyi-uniapp
 - 后端服务：https://gitee.com/ageerle/ruoyi-ai
+
+[2]github
+- 前端服务-用户端: https://github.com/ageerle/ruoyi-web
+- 前端服务-管理端: https://github.com/ageerle/ruoyi-admin
+- 前端服务-小程序端: https://github.com/ageerle/ruoyi-uniapp
+- 后端服务：https://github.com/ageerle/ruoyi-ai
 
 [3]gitcode
 - 前端服务-用户端：https://gitcode.com/ageerle/ruoyi-web
@@ -83,7 +84,7 @@
 
 ### 配套文档
 - 配套文档: https://doc.pandarobot.chat
-  - 项目部署文档：https://doc.pandarobot.chat/guide/introduction/
+- 项目部署文档：https://doc.pandarobot.chat/guide/introduction/
 
 ### 核心功能
 1. 全套开源系统：提供完整的前端应用、后台管理以及小程序应用，基于MIT协议，开箱即用。
@@ -95,6 +96,23 @@
 7. 支付功能：支持易支付、微信支付等多种支付方式。
 
 ### 项目演示
+
+#### mcp支持
+
+### 如何使用
+1. ruoyi-admin\src\main\resources\application.yml中mcp.client.enabled改为true
+2. application.yml中配置openai api-key(用于推理使用那个工具,并构建工具所需参数)
+3. 启动[ruoyi-mcp-server]
+4. [mcp-server.json]中配置fileSystem.command(npx本地安装路径)
+5. 指定fileSystem操作目录(本地必须存在指定的目录)
+6. 配置search1api.env.SEARCH1API_KEY 申请地址：https://www.search1api.com/
+7. 详情教程：https://blog.csdn.net/weixin_42416319/article/details/147385808
+<div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+  <img src="image/mcp-01.png" alt="drawing" style="width: 600px; height: 300px; border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"/>
+  <img src="image/mcp-02.png" alt="drawing" style="width: 600px; height: 300px; border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"/>
+  <img src="image/mcp-03.png" alt="drawing" style="width: 600px; height: 300px; border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"/>
+  <img src="image/mcp-04.png" alt="drawing" style="width: 600px; height: 300px; border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"/>
+</div>
 
 #### 管理端
 <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
@@ -207,16 +225,12 @@
 
 ###  开发计划
 
-- 智能体管理
+| 主题 | 方向                                | 时间节点   | 
+| --- |-----------------------------------|--------| 
+| 前端简化版 | 与element-plus-x框架合作，推出基于该框架的前端简化版 | 2025.5 | 
+| agent2agent | Agent2Agent协议支持                   | 2025.6 | 
+| 流程编排 | 通过可视化界面和灵活的配置方式，快速构建AI应用          | 2025.7 | 
 
-通过设置提示词、插件、知识库等，用户可以快速构建一个AI应用。这将极大地简化AI应用的开发流程，降低开发门槛，使更多企业能够轻松地利用AI技术。
-<div>
-  <img src="image/13.png" alt="drawing" width="600px" height="300px"/>
-</div>
-
-- 流程编排
-
-通过流程编排功能，用户可以将不同的模型按照业务逻辑进行有序连接。这将解决单一模型能力不足的问题，充分发挥多个模型的协同作用，从而更好地满足企业的复杂业务需求。
 
 -  感谢
 
@@ -266,18 +280,6 @@
 
 ### 附：技术讨论群
 
-#### 氛围积极、拥抱AI
-- wx交流群
-<div>
-  <img src="image/wx-msg.png" alt="drawing" width="600px" height="300px"/>
-  <img src="image/wx-msg2.png" alt="drawing" width="600px" height="300px"/>
-</div>
-
-- qq交流群
-<div>
-  <img src="image/qq-msg.png" alt="drawing" width="600px" height="300px"/>
-</div>
-
 #### 全面开放，欢迎加入
 🏠 wx：ruoyi-ai（加人备注：ruoyi-ai）
 
@@ -288,5 +290,11 @@
 <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
   <img src="image/QQ区-官方交流1群.png" alt="drawing" style="width: 400px; height: 400px; border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"/>
 </div>
+
+👏👏👏 ruoyi-ai官方交流4群（微信区）：
+<div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+  <img src="image/WX区-官方交流4群.jpg" alt="drawing" style="width: 400px; height: 400px; border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"/>
+</div>
+
 
 
