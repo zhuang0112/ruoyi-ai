@@ -7,15 +7,15 @@ import com.knuddels.jtokkit.api.EncodingRegistry;
 import com.knuddels.jtokkit.api.EncodingType;
 import com.knuddels.jtokkit.api.ModelType;
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 import org.ruoyi.common.chat.entity.chat.ChatCompletion;
 import org.ruoyi.common.chat.entity.chat.FunctionCall;
 import org.ruoyi.common.chat.entity.chat.Message;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
 /**
- * 描述：token计算工具类
+ *  token计算工具类
  *
  * @author https:www.unfbx.com
  * @since 2023-04-04

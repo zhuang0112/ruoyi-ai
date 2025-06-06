@@ -1,11 +1,11 @@
 package org.ruoyi.domain;
 
-import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import org.ruoyi.core.domain.BaseEntity;
 
 import java.io.Serial;
+import java.io.Serializable;
 
 /**
  * 用户token使用详情对象 chat_usage_token
@@ -14,9 +14,8 @@ import java.io.Serial;
  * @date 2025-04-08
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
 @TableName("chat_usage_token")
-public class ChatUsageToken extends BaseEntity {
+public class ChatUsageToken implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;

@@ -3,7 +3,6 @@ package org.ruoyi.domain.vo;
 
 import com.alibaba.excel.annotation.ExcelIgnoreUnannotated;
 import com.alibaba.excel.annotation.ExcelProperty;
-
 import io.github.linpeilie.annotations.AutoMapper;
 import lombok.Data;
 import org.ruoyi.common.excel.annotation.ExcelDictFormat;
@@ -98,16 +97,20 @@ public class KnowledgeInfoVo implements Serializable {
     private Integer textBlockSize;
 
     /**
-     * 向量库
+     * 向量库模型名称
      */
-    @ExcelProperty(value = "向量库")
-    private String vector;
+    private String vectorModelName;
 
     /**
-     * 向量模型
+     * 向量化模型名称
      */
-    @ExcelProperty(value = "向量模型")
-    private String vectorModel;
+    private String embeddingModelName;
+
+
+    /**
+     * 系统提示词
+     */
+    private String systemPrompt;
 
     /**
      * 备注

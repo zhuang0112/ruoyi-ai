@@ -1,13 +1,14 @@
 package org.ruoyi.service.impl;
 
-import org.ruoyi.common.core.utils.MapstructUtils;
-import org.ruoyi.common.core.utils.StringUtils;
-import org.ruoyi.core.page.TableDataInfo;
-import org.ruoyi.core.page.PageQuery;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;
+import org.ruoyi.common.core.utils.MapstructUtils;
+import org.ruoyi.common.core.utils.StringUtils;
+import org.ruoyi.common.satoken.utils.LoginHelper;
+import org.ruoyi.core.page.PageQuery;
+import org.ruoyi.core.page.TableDataInfo;
 import org.ruoyi.domain.ChatMessage;
 import org.ruoyi.domain.bo.ChatMessageBo;
 import org.ruoyi.domain.vo.ChatMessageVo;
@@ -15,10 +16,9 @@ import org.ruoyi.mapper.ChatMessageMapper;
 import org.ruoyi.service.IChatMessageService;
 import org.springframework.stereotype.Service;
 
-
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Collection;
 
 /**
  * 聊天消息Service业务层处理
@@ -45,6 +45,10 @@ public class ChatMessageServiceImpl implements IChatMessageService {
      */
     @Override
     public TableDataInfo<ChatMessageVo> queryPageList(ChatMessageBo bo, PageQuery pageQuery) {
+        if(!LoginHelper.isLogin()){
+            return TableDataInfo.build();
+        }
+        bo.setUserId(LoginHelper.getUserId());
         LambdaQueryWrapper<ChatMessage> lqw = buildQueryWrapper(bo);
         Page<ChatMessageVo> result = baseMapper.selectVoPage(pageQuery.build(), lqw);
         return TableDataInfo.build(result);
@@ -64,9 +68,8 @@ public class ChatMessageServiceImpl implements IChatMessageService {
         LambdaQueryWrapper<ChatMessage> lqw = Wrappers.lambdaQuery();
         lqw.eq(bo.getUserId() != null, ChatMessage::getUserId, bo.getUserId());
         lqw.eq(StringUtils.isNotBlank(bo.getContent()), ChatMessage::getContent, bo.getContent());
-        lqw.eq(StringUtils.isNotBlank(bo.getRole()), ChatMessage::getRole, bo.getRole());
-        lqw.eq(bo.getDeductCost() != null, ChatMessage::getDeductCost, bo.getDeductCost());
-        lqw.eq(bo.getTotalTokens() != null, ChatMessage::getTotalTokens, bo.getTotalTokens());
+        lqw.eq(bo.getSessionId() != null, ChatMessage::getSessionId, bo.getSessionId());
+        lqw.like(StringUtils.isNotBlank(bo.getRole()), ChatMessage::getRole, bo.getRole());
         lqw.like(StringUtils.isNotBlank(bo.getModelName()), ChatMessage::getModelName, bo.getModelName());
         return lqw;
     }

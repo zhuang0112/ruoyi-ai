@@ -1,7 +1,8 @@
 package org.ruoyi.domain;
 
 
-import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.ruoyi.core.domain.BaseEntity;
@@ -46,7 +47,7 @@ public class ChatModel extends BaseEntity {
     /**
      * 模型价格
      */
-    private Long modelPrice;
+    private Double modelPrice;
 
     /**
      * 计费类型
@@ -67,6 +68,7 @@ public class ChatModel extends BaseEntity {
      * 请求地址
      */
     private String apiHost;
+
 
     /**
      * 密钥

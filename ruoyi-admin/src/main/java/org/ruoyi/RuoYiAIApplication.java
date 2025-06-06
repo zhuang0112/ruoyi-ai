@@ -3,6 +3,8 @@ package org.ruoyi;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.metrics.buffering.BufferingApplicationStartup;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
@@ -11,6 +13,8 @@ import org.springframework.context.annotation.ComponentScan;
  * @author Lion Li
  */
 @SpringBootApplication
+@EnableScheduling
+@EnableAsync
 @ComponentScan(basePackages = {"com.zhuang.*", "org.ruoyi.*"})
 public class RuoYiAIApplication {
 

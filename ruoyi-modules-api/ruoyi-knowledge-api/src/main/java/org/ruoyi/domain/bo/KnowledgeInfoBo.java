@@ -1,13 +1,14 @@
 package org.ruoyi.domain.bo;
 
-import org.ruoyi.common.core.validate.AddGroup;
-import org.ruoyi.common.core.validate.EditGroup;
-import org.ruoyi.domain.KnowledgeInfo;
-import org.ruoyi.core.domain.BaseEntity;
 import io.github.linpeilie.annotations.AutoMapper;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import jakarta.validation.constraints.*;
+import org.ruoyi.common.core.validate.AddGroup;
+import org.ruoyi.common.core.validate.EditGroup;
+import org.ruoyi.core.domain.BaseEntity;
+import org.ruoyi.domain.KnowledgeInfo;
 
 /**
  * 知识库业务对象 knowledge_info
@@ -83,16 +84,22 @@ public class KnowledgeInfoBo extends BaseEntity {
     private Long textBlockSize;
 
     /**
-     * 向量库
+     * 向量库模型名称
      */
     @NotBlank(message = "向量库不能为空", groups = { AddGroup.class, EditGroup.class })
-    private String vector;
+    private String vectorModelName;
 
     /**
-     * 向量模型
+     * 向量化模型名称
      */
     @NotBlank(message = "向量模型不能为空", groups = { AddGroup.class, EditGroup.class })
-    private String vectorModel;
+    private String embeddingModelName;
+
+
+    /**
+     * 系统提示词
+     */
+    private String systemPrompt;
 
     /**
      * 备注

@@ -6,14 +6,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.ruoyi.chat.enums.BillingType;
 import org.ruoyi.chat.enums.UserGradeType;
 import org.ruoyi.chat.service.chat.IChatCostService;
-import org.ruoyi.common.chat.config.LocalCache;
 import org.ruoyi.common.chat.request.ChatRequest;
 import org.ruoyi.common.chat.utils.TikTokensUtil;
 import org.ruoyi.common.core.domain.model.LoginUser;
 import org.ruoyi.common.core.exception.ServiceException;
 import org.ruoyi.common.core.exception.base.BaseException;
 import org.ruoyi.common.satoken.utils.LoginHelper;
-import org.ruoyi.domain.ChatToken;
+import org.ruoyi.domain.ChatUsageToken;
 import org.ruoyi.domain.bo.ChatMessageBo;
 import org.ruoyi.domain.vo.ChatModelVo;
 import org.ruoyi.service.IChatMessageService;
@@ -46,7 +45,11 @@ public class ChatCostServiceImpl implements IChatCostService {
     /**
      * 扣除用户余额
      */
+    @Override
     public void deductToken(ChatRequest chatRequest) {
+        if(chatRequest.getUserId()==null || chatRequest.getSessionId()==null){
+            return;
+        }
 
         int tokens = TikTokensUtil.tokens(chatRequest.getModel(), chatRequest.getPrompt());
 
@@ -54,16 +57,19 @@ public class ChatCostServiceImpl implements IChatCostService {
 
         ChatMessageBo chatMessageBo = new ChatMessageBo();
 
-        Object userId = LocalCache.CACHE.get("userId");
-        if(userId!=null){
-            chatMessageBo.setUserId((Long) userId);
-        }else {
-            chatMessageBo.setUserId(getUserId());
-        }
+        // 设置用户id
+        chatMessageBo.setUserId(chatRequest.getUserId());
+        // 设置对话角色
+        chatMessageBo.setRole(chatRequest.getRole());
+        // 设置会话id
+        chatMessageBo.setSessionId(chatRequest.getSessionId());
+        // 设置对话内容
+        chatMessageBo.setContent(chatRequest.getPrompt());
+
         // 计算总token数
-        ChatToken chatToken = chatTokenService.queryByUserId(chatMessageBo.getUserId(), modelName);
+        ChatUsageToken chatToken = chatTokenService.queryByUserId(chatMessageBo.getUserId(), modelName);
         if (chatToken == null) {
-            chatToken = new ChatToken();
+            chatToken = new ChatUsageToken();
             chatToken.setToken(0);
         }
         int totalTokens = chatToken.getToken() + tokens;
@@ -93,7 +99,7 @@ public class ChatCostServiceImpl implements IChatCostService {
                 deductUserBalance(chatMessageBo.getUserId(), numberCost);
                 chatMessageBo.setDeductCost(numberCost);
             }
-            chatMessageBo.setContent(chatRequest.getPrompt());
+
         } else {
             deductUserBalance(chatMessageBo.getUserId(), 0.0);
             chatMessageBo.setDeductCost(0d);

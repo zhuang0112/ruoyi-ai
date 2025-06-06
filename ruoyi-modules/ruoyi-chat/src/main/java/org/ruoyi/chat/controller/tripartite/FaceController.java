@@ -6,7 +6,6 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.Request;
-import org.apache.commons.lang3.math.NumberUtils;
 import org.ruoyi.chat.domain.InsightFace;
 import org.ruoyi.chat.service.chat.IChatCostService;
 import org.ruoyi.chat.util.MjOkHttpUtil;
@@ -16,6 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
+/**
+ * 绘画(换脸)任务查询
+ *
+ * @author ageerle
+ * @date 2025-05-03
+ */
 @Api(tags = "任务查询")
 @RestController
 @RequestMapping("/mj")
@@ -31,7 +36,7 @@ public class FaceController {
     @PostMapping("/insight-face/swap")
     public String insightFace(@RequestBody InsightFace insightFace) {
         // 扣除接口费用并且保存消息记录
-        chatCostService.taskDeduct("mj","Face Changing", NumberUtils.toDouble(mjOkHttpUtil.getKey("faceSwapping"), 0.1));
+        chatCostService.taskDeduct("mj","Face Changing", 0.0);
         // 创建请求体（这里使用JSON作为媒体类型）
         String insightFaceJson = JSONUtil.toJsonStr(insightFace);
         String url = "mj/insight-face/swap";

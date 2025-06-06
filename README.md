@@ -34,6 +34,60 @@
     <a href="https://github.com/ageerle/ruoyi-ai/issues">提出新特性</a>
 </p>
 
+## 快速启动
+
+### 拉取镜像(最低配置2H2G):
+   ```bash
+     script/deploy/deploy目录下执行: docker-compose up -d
+  ```
+
+### 通过脚本启动(最低配置4H4G):
+1. 确认系统内已经安装好以下软件
+   - docker
+   - docker-compose
+   - git
+   - unzip
+
+2. **克隆项目**
+   ```bash
+   git clone https://github.com/ageerle/ruoyi-ai
+   cd ruoyi-ai/script/deploy/one-step-script
+   ```
+
+3. **启动部署脚本**
+
+   中文界面部署脚本(拉取gitee仓库)：
+
+   ```bash
+   ./deploy-cn.sh
+   ```
+   按照脚本提示一步步操作,如果是一台新服务器,选择默认配置,直接回车即可。
+   <img src="image/deploy-01.png" alt="drawing" style="width: 600px; height: 300px; border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"/>
+
+   耐心等待安装完成...
+
+   英文界面部署脚本(拉取github仓库)：
+   
+   ```bash
+   ./deploy-en.sh
+   ```
+
+4. 如果在执行部署脚本过程中不需要在本地重新构建编译服务软件包以及重新封装容器镜像，则需要在脚本交互提出以下问题时选择D按键进行直接部署，否则就会执行全新的编译构建及容器封装之后再执行部署：
+     ```
+     已将模板文件复制到部署目录。
+     正在使用您的配置更新 .env 文件...
+     已使用您的配置更新 .env 文件。
+     正在使用您的配置更新 docker-compose.yaml 文件...
+     已使用您的配置更新 docker-compose.yaml 文件。
+
+     === 构建或部署选项 ===
+     您想构建新镜像 (B) 还是直接使用现有镜像部署 (D)？[B/d]: 
+     ```
+
+5. **访问应用界面**
+   - 用户界面：`http://your-server-ip:8081`
+   - 管理员界面：`http://your-server-ip:8082`
+
 ## 目录
 
 - [系统体验](#系统体验)
@@ -43,7 +97,6 @@
 - [项目演示](#项目演示)
   - [管理端](#管理端)
   - [用户端](#用户端)
-  - [小程序端](#小程序端)
 - [开发环境](#开发环境)
 - [项目结构](#项目结构)
   - [ruoyi-ai](#ruoyi-ai)
@@ -58,68 +111,50 @@
 
 ### 系统体验
 - 用户端：https://web.pandarobot.chat
+- 演示账号: demo 密码：demo123
 - 管理端：https://admin.pandarobot.chat
-  
-  用户名: admin 密码：admin123
+- 演示账号: admin 密码：admin123
+- 商业版：体验商业版请联系下方小助手获取演示地址（预计6月份上线）。
 
 ### 源码地址
-
-[1]gitee
-- 前端服务-用户端: https://gitee.com/ageerle/ruoyi-web
-- 前端服务-管理端: https://gitee.com/ageerle/ruoyi-admin
-- 前端服务-小程序端: https://gitee.com/ageerle/ruoyi-uniapp
-- 后端服务：https://gitee.com/ageerle/ruoyi-ai
-
-[2]github
+[1]github
 - 前端服务-用户端: https://github.com/ageerle/ruoyi-web
 - 前端服务-管理端: https://github.com/ageerle/ruoyi-admin
-- 前端服务-小程序端: https://github.com/ageerle/ruoyi-uniapp
 - 后端服务：https://github.com/ageerle/ruoyi-ai
 
-[3]gitcode
+[2]gitcode
 - 前端服务-用户端：https://gitcode.com/ageerle/ruoyi-web
 - 前端服务-管理端:  https://gitcode.com/ageerle/ruoyi-admin
-- 前端服务-小程序端:  https://gitcode.com/ageerle/ruoyi-uniapp
 - 后端服务：https://gitcode.com/ageerle/ruoyi-ai
 
 ### 配套文档
 - 配套文档: https://doc.pandarobot.chat
 - 项目部署文档：https://doc.pandarobot.chat/guide/introduction/
 
-### 核心功能
-1. 全套开源系统：提供完整的前端应用、后台管理以及小程序应用，基于MIT协议，开箱即用。
-2. 本地RAG方案：集成Milvus/Weaviate向量库、本地向量化模型与Ollama，实现本地化RAG。
-3. 丰富插件功能：支持联网、SQL查询插件及Text2API插件，扩展系统能力与应用场景。
-4. 内置SSE、websocket等网络协议，支持对接多种大语言模型，同时还集成了MidJourney和DALLE AI绘画功能。
-5. 强大的多媒体功能：支持AI翻译、PPT制作、语音克隆和翻唱等。
-6. 扩展功能：支持将大模型接入个人或企业微信。
-7. 支付功能：支持易支付、微信支付等多种支付方式。
+### 核心功能与技术亮点
+#### 1. 全栈式开源系统
+- 全套开源系统：提供完整的前端应用、后台管理,基于MIT协议，开箱即用。
+#### 2. 本地化 RAG 方案
+-  基于 **Langchain4j** 框架，支持 Milvus/Weaviate/Qdrant 向量库，结合 BGE-large-zh-v1.5 本地向量化模型 实现高效文档检索与知识库构建。
+-  支持 本地 LLM 接入，结合私有知识库实现安全可控的问答系统，避免依赖云端服务的隐私风险。
+#### 3. 多模态 AI 引擎与工具集成
+-  智能对话：支持 OpenAI GPT-4、Azure、ChatGLM 等主流模型，内置 SSE/WebSocket 协议实现低延迟交互，兼容 **扣子**、**DIFY** 等平台 API 调用。
+-  **Spring AI MCP** 支持：通过注解快速定义本地工具，支持调用 MCP 广场 的海量 MCP Server 服务，扩展模型能力边界。
+#### 4. 企业级扩展与商业化支持
+-  即时通讯集成：支持对接个人微信、企业微信及微信公众号，实现消息自动回复、用户管理与智能客服。
+-  支付系统：集成易支付、微信支付、Stripe 国际信用卡支付，满足商业化场景需求。
+#### 5. 多媒体处理与创新功能
+ -  AI 绘画：集成 DALL·E-3、MidJourney、Stable Diffusion，支持文生图、图生图及风格化创作，适用于营销素材生成与创意设计。
+ -  PPT 制作：根据文本输入自动生成结构化幻灯片，支持自定义模板(需要使用三方平台 如：文多多)。
 
 ### 项目演示
 
 #### mcp支持
-
-### 如何使用
-1. ruoyi-admin\src\main\resources\application.yml中mcp.client.enabled改为true
-2. application.yml中配置openai api-key(用于推理使用那个工具,并构建工具所需参数)
-3. 启动[ruoyi-mcp-server]
-4. [mcp-server.json]中配置fileSystem.command(npx本地安装路径)
-5. 指定fileSystem操作目录(本地必须存在指定的目录)
-6. 配置search1api.env.SEARCH1API_KEY 申请地址：https://www.search1api.com/
-7. 详情教程：https://blog.csdn.net/weixin_42416319/article/details/147385808
 <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
   <img src="image/mcp-01.png" alt="drawing" style="width: 600px; height: 300px; border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"/>
   <img src="image/mcp-02.png" alt="drawing" style="width: 600px; height: 300px; border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"/>
   <img src="image/mcp-03.png" alt="drawing" style="width: 600px; height: 300px; border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"/>
   <img src="image/mcp-04.png" alt="drawing" style="width: 600px; height: 300px; border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"/>
-</div>
-
-#### 管理端
-<div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
-  <img src="image/02.png" alt="drawing" style="width: 600px; height: 300px; border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"/>
-  <img src="image/03.png" alt="drawing" style="width: 600px; height: 300px; border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"/>
-  <img src="image/04.png" alt="drawing" style="width: 600px; height: 300px; border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"/>
-  <img src="image/05.png" alt="drawing" style="width: 600px; height: 300px; border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"/>
 </div>
 
 
@@ -131,11 +166,14 @@
   <img src="image/11.png" alt="drawing" style="width: 600px; height: 300px; border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"/>
 </div>
 
-#### 小程序端
-<div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: flex-start;">
-  <img src="image/06.png" alt="drawing" style="width: 320px; height: 600px; border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"/>
-  <img src="image/07.png" alt="drawing" style="width: 320px; height: 600px; border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"/>
+#### 管理端
+<div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+  <img src="image/02.png" alt="drawing" style="width: 600px; height: 300px; border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"/>
+  <img src="image/03.png" alt="drawing" style="width: 600px; height: 300px; border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"/>
+  <img src="image/04.png" alt="drawing" style="width: 600px; height: 300px; border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"/>
+  <img src="image/05.png" alt="drawing" style="width: 600px; height: 300px; border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"/>
 </div>
+
 
 ### 开发环境
 
@@ -204,7 +242,6 @@
 ### 注意事项
 - vben模板
 
-
     Q：vben5 的模板默认是没有的吗？
   
     A：vben模板是收费的 请联系vben-vue-plus作者获取。
@@ -212,7 +249,6 @@
 ### 版本控制
 
 该项目使用Git进行版本管理。您可以在repository参看当前可用版本。
-
 
 
 ### 版权说明
@@ -251,7 +287,7 @@
 
 #### 项目文档
 1. 项目文档基于vitepress构建
-2. 按照[如何参与开源项目](#如何参与开源项目)拉取 https://github.com/ageerle/ruoyi-doc
+2. 按照[如何参与开源项目](#如何参与开源项目)拉取https://github.com/ageerle/ruoyi-doc
 3. 安装依赖：npm install
 4. 启动项目：npm run docs:dev
 5. 主页路径：docs/guide/introduction/index.md
@@ -277,24 +313,24 @@
 [license-url]: https://github.com/ageerle/ruoyi-ai/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 
+## 🌿 第三方生态
+- [PPIO 派欧云：一键调用高性价比的开源模型 API 和 GPU 容器](https://ppinfra.com/user/register?invited_by=P8QTUY&utm_source=github_ruoyi-ai)
 
 ### 附：技术讨论群
 
-#### 全面开放，欢迎加入
-🏠 wx：ruoyi-ai（加人备注：ruoyi-ai）
+#### 技术交流（如需进群请添加小助手）
+<div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+ <img src="image/wx.png" alt="drawing" style="width: 400px; height: 400px; border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"/>
+</div>
+ 
 
-🏠 qq：1603234088 （加人备注：ruoyi-ai）
+#### 进群学习
+🏠 小助手wx：ruoyi-ai（加人备注：ruoyi-ai）
+🏠 小助手qq：1603234088 （加人备注：ruoyi-ai）
 
-👏👏👏 ruoyi-ai官方交流1群（qq区）：1034554687 
+👏👏👏 ruoyi-ai官方交流群（qq区）
 
 <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
-  <img src="image/QQ区-官方交流1群.png" alt="drawing" style="width: 400px; height: 400px; border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"/>
+  <img src="image/qq.png" alt="drawing" style="width: 400px; height: 400px; border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"/>
 </div>
-
-👏👏👏 ruoyi-ai官方交流4群（微信区）：
-<div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
-  <img src="image/WX区-官方交流4群.jpg" alt="drawing" style="width: 400px; height: 400px; border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"/>
-</div>
-
-
 

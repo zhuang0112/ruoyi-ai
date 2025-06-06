@@ -1,13 +1,13 @@
 package org.ruoyi.domain;
 
-import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.ruoyi.core.domain.BaseEntity;
 
-import java.math.BigDecimal;
-
 import java.io.Serial;
+import java.math.BigDecimal;
 
 /**
  * 聊天消息对象 chat_message
@@ -33,6 +33,11 @@ public class ChatMessage extends BaseEntity {
      * 用户id
      */
     private Long userId;
+
+    /**
+     * 会话id
+     */
+    private Long sessionId;
 
     /**
      * 消息内容

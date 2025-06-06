@@ -3,9 +3,10 @@ package org.ruoyi.domain.vo;
 
 import com.alibaba.excel.annotation.ExcelIgnoreUnannotated;
 import com.alibaba.excel.annotation.ExcelProperty;
-
 import io.github.linpeilie.annotations.AutoMapper;
 import lombok.Data;
+import org.ruoyi.common.sensitive.annotation.Sensitive;
+import org.ruoyi.common.sensitive.core.SensitiveStrategy;
 import org.ruoyi.domain.ChatModel;
 
 import java.io.Serial;
@@ -56,7 +57,7 @@ public class ChatModelVo implements Serializable {
      * 模型价格
      */
     @ExcelProperty(value = "模型价格")
-    private Long modelPrice;
+    private Double modelPrice;
 
     /**
      * 计费类型
@@ -85,6 +86,7 @@ public class ChatModelVo implements Serializable {
     /**
      * 密钥
      */
+    @Sensitive(strategy = SensitiveStrategy.PHONE)
     @ExcelProperty(value = "密钥")
     private String apiKey;
 
@@ -93,6 +95,5 @@ public class ChatModelVo implements Serializable {
      */
     @ExcelProperty(value = "备注")
     private String remark;
-
 
 }

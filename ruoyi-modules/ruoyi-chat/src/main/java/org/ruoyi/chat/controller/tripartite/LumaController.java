@@ -4,7 +4,6 @@ import cn.hutool.json.JSONUtil;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
 import okhttp3.Request;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.ruoyi.chat.config.OkHttpConfig;
@@ -14,10 +13,10 @@ import org.ruoyi.common.core.utils.OkHttpUtil;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * 描述：文生视频
+ * 文生视频
  *
- * @author ageerle@163.com
- * date 2024/6/27
+ * @author ageerle
+ * @date 2025-05-03
  */
 @RestController
 @RequestMapping("/luma")

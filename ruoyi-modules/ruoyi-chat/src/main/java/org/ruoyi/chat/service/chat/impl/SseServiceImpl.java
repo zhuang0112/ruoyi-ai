@@ -1,18 +1,15 @@
 package org.ruoyi.chat.service.chat.impl;
 
-import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.collection.CollectionUtil;
-import com.google.protobuf.ServiceException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.ResponseBody;
-import org.ruoyi.chat.enums.ChatModeType;
+import org.ruoyi.chat.factory.ChatServiceFactory;
 import org.ruoyi.chat.service.chat.IChatCostService;
+import org.ruoyi.chat.service.chat.IChatService;
 import org.ruoyi.chat.service.chat.ISseService;
-import org.ruoyi.chat.util.IpUtil;
 import org.ruoyi.chat.util.SSEUtil;
-import org.ruoyi.common.chat.config.LocalCache;
 import org.ruoyi.common.chat.entity.Tts.TextToSpeech;
 import org.ruoyi.common.chat.entity.chat.Message;
 import org.ruoyi.common.chat.entity.files.UploadFileResponse;
@@ -23,10 +20,14 @@ import org.ruoyi.common.core.utils.DateUtils;
 import org.ruoyi.common.core.utils.StringUtils;
 import org.ruoyi.common.core.utils.file.FileUtils;
 import org.ruoyi.common.core.utils.file.MimeTypeUtils;
-import org.ruoyi.common.redis.utils.RedisUtils;
+import org.ruoyi.common.satoken.utils.LoginHelper;
+import org.ruoyi.domain.bo.ChatSessionBo;
+import org.ruoyi.domain.bo.QueryVectorBo;
 import org.ruoyi.domain.vo.ChatModelVo;
-import org.ruoyi.service.EmbeddingService;
+import org.ruoyi.domain.vo.KnowledgeInfoVo;
 import org.ruoyi.service.IChatModelService;
+import org.ruoyi.service.IChatSessionService;
+import org.ruoyi.service.IKnowledgeInfoService;
 import org.ruoyi.service.VectorStoreService;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
@@ -42,10 +43,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author ageer
+ */
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -53,17 +56,17 @@ public class SseServiceImpl implements ISseService {
 
     private final OpenAiStreamClient openAiStreamClient;
 
-    private final EmbeddingService embeddingService;
-
-    private final VectorStoreService vectorStore;
+    private final VectorStoreService vectorStoreService;
 
     private final IChatCostService chatCostService;
 
     private final IChatModelService chatModelService;
 
-    private final OpenAIServiceImpl openAIService;
+    private final ChatServiceFactory chatServiceFactory;
 
-    private final OllamaServiceImpl ollamaService;
+    private final IChatSessionService chatSessionService;
+
+    private final IKnowledgeInfoService knowledgeInfoService;
 
     private ChatModelVo chatModelVo;
 
@@ -74,17 +77,25 @@ public class SseServiceImpl implements ISseService {
         try {
             // 构建消息列表
             buildChatMessageList(chatRequest);
-            if (!StpUtil.isLogin()) {
-                // 未登录用户限制对话次数
-                checkUnauthenticatedUserChatLimit(request);
-            }else {
-                LocalCache.CACHE.put("userId", chatCostService.getUserId());
-                chatRequest.setUserId(chatCostService.getUserId());
+            // 设置对话角色
+            chatRequest.setRole(Message.Role.USER.getName());
+
+            if(LoginHelper.isLogin()){
                 // 保存消息记录 并扣除费用
                 chatCostService.deductToken(chatRequest);
+                chatRequest.setUserId(chatCostService.getUserId());
+                if(chatRequest.getSessionId()==null){
+                    ChatSessionBo chatSessionBo = new ChatSessionBo();
+                    chatSessionBo.setUserId(chatCostService.getUserId());
+                    chatSessionBo.setSessionTitle(getFirst10Characters(chatRequest.getPrompt()));
+                    chatSessionBo.setSessionContent(chatRequest.getPrompt());
+                    chatSessionService.insertByBo(chatSessionBo);
+                    chatRequest.setSessionId(chatSessionBo.getId());
+                }
             }
             // 根据模型分类调用不同的处理逻辑
-            switchModelAndHandle(chatRequest,sseEmitter);
+            IChatService chatService = chatServiceFactory.getChatService(chatModelVo.getCategory());
+            chatService.chat(chatRequest, sseEmitter);
         } catch (Exception e) {
             log.error(e.getMessage(),e);
             SSEUtil.sendErrorEvent(sseEmitter,e.getMessage());
@@ -93,41 +104,19 @@ public class SseServiceImpl implements ISseService {
     }
 
     /**
-     * 检查未登录用户是否超过当日对话次数限制
+     * 获取对话标题
      *
-     * @param request 当前请求
-     * @throws ServiceException 如果当日免费次数已用完
+     * @param str 原字符
+     * @return 截取后的字符
      */
-    public void checkUnauthenticatedUserChatLimit(HttpServletRequest request) throws ServiceException {
-
-            String clientIp = IpUtil.getClientIp(request);
-            // 访客每天默认只能对话5次
-            int timeWindowInSeconds = 5;
-            String redisKey = "clientIp:" + clientIp;
-            int count = 0;
-            // 检查Redis中的对话次数
-            if (RedisUtils.getCacheObject(redisKey) == null) {
-                // 缓存有效时间1天
-                RedisUtils.setCacheObject(redisKey, count, Duration.ofSeconds(86400));
-            } else {
-                count = RedisUtils.getCacheObject(redisKey);
-                if (count >= timeWindowInSeconds) {
-                    throw new ServiceException("当日免费次数已用完");
-                }
-                count++;
-                RedisUtils.setCacheObject(redisKey, count);
-            }
-    }
-
-    /**
-     *  根据模型名称前缀调用不同的处理逻辑
-     */
-    private void switchModelAndHandle(ChatRequest chatRequest,SseEmitter emitter) {
-        // 调用ollama中部署的本地模型
-        if (ChatModeType.OLLAMA.getCode().equals(chatModelVo.getCategory())) {
-            ollamaService.chat(chatRequest,emitter);
+    public static String getFirst10Characters(String str) {
+        // 判断字符串长度
+        if (str.length() > 10) {
+            // 如果长度大于10，截取前10个字符
+            return str.substring(0, 10);
         } else {
-            openAIService.chat(chatRequest,emitter);
+            // 如果长度不足10，返回整个字符串
+            return str;
         }
     }
 
@@ -135,35 +124,66 @@ public class SseServiceImpl implements ISseService {
      *  构建消息列表
      */
     private void buildChatMessageList(ChatRequest chatRequest){
-         chatModelVo = chatModelService.selectModelByName(chatRequest.getModel());
+        String sysPrompt;
+        // 矫正模型名称 如果是gpt-image 则查询image类型模型 获取模型名称
+        if(chatRequest.getModel().equals("gpt-image")) {
+            chatModelVo = chatModelService.selectModelByCategory("image");
+            if (chatModelVo == null) {
+                log.error("未找到image类型的模型配置");
+                throw new IllegalStateException("未找到image类型的模型配置");
+            }
+        }else{
+            chatModelVo = chatModelService.selectModelByName(chatRequest.getModel());
+        }
         // 获取对话消息列表
         List<Message> messages = chatRequest.getMessages();
-        String sysPrompt = chatModelVo.getSystemPrompt();
-        if(StringUtils.isEmpty(sysPrompt)){
-            sysPrompt ="你是一个由RuoYI-AI开发的人工智能助手，名字叫熊猫助手。你擅长中英文对话，能够理解并处理各种问题，提供安全、有帮助、准确的回答。" +
-                    "当前时间："+ DateUtils.getDate()+
-                    "#注意：回复之前注意结合上下文和工具返回内容进行回复。";
+        // 查询向量库相关信息加入到上下文
+        if(StringUtils.isNotEmpty(chatRequest.getKid())){
+            List<Message> knMessages = new ArrayList<>();
+            String content = messages.get(messages.size() - 1).getContent().toString();
+            // 通过kid查询知识库信息
+            KnowledgeInfoVo knowledgeInfoVo = knowledgeInfoService.queryById(Long.valueOf(chatRequest.getKid()));
+            // 查询向量模型配置信息
+            ChatModelVo chatModel = chatModelService.selectModelByName(knowledgeInfoVo.getEmbeddingModelName());
+
+            QueryVectorBo queryVectorBo = new QueryVectorBo();
+            queryVectorBo.setQuery(content);
+            queryVectorBo.setKid(chatRequest.getKid());
+            queryVectorBo.setApiKey(chatModel.getApiKey());
+            queryVectorBo.setBaseUrl(chatModel.getApiHost());
+            queryVectorBo.setVectorModelName(knowledgeInfoVo.getVectorModelName());
+            queryVectorBo.setEmbeddingModelName(knowledgeInfoVo.getEmbeddingModelName());
+            queryVectorBo.setMaxResults(knowledgeInfoVo.getRetrieveLimit());
+            List<String> nearestList = vectorStoreService.getQueryVector(queryVectorBo);
+            for (String prompt : nearestList) {
+                Message userMessage = Message.builder().content(prompt).role(Message.Role.USER).build();
+                knMessages.add(userMessage);
+            }
+            messages.addAll(knMessages);
+            // 设置知识库系统提示词
+            sysPrompt = knowledgeInfoVo.getSystemPrompt();
+            if(StringUtils.isEmpty(sysPrompt)){
+                sysPrompt ="###角色设定\n" +
+                        "你是一个智能知识助手，专注于利用上下文中的信息来提供准确和相关的回答。\n" +
+                        "###指令\n" +
+                        "当用户的问题与上下文知识匹配时，利用上下文信息进行回答。如果问题与上下文不匹配，运用自身的推理能力生成合适的回答。\n" +
+                        "###限制\n" +
+                        "确保回答清晰简洁，避免提供不必要的细节。始终保持语气友好" +
+                        "当前时间："+ DateUtils.getDate();
+            }
+        }else {
+            sysPrompt = chatModelVo.getSystemPrompt();
+            if(StringUtils.isEmpty(sysPrompt)){
+                sysPrompt ="你是一个由RuoYI-AI开发的人工智能助手，名字叫熊猫助手。你擅长中英文对话，能够理解并处理各种问题，提供安全、有帮助、准确的回答。" +
+                        "当前时间："+ DateUtils.getDate()+
+                        "#注意：回复之前注意结合上下文和工具返回内容进行回复。";
+            }
         }
         // 设置系统默认提示词
         Message sysMessage = Message.builder().content(sysPrompt).role(Message.Role.SYSTEM).build();
         messages.add(0,sysMessage);
 
         chatRequest.setSysPrompt(sysPrompt);
-        // 查询向量库相关信息加入到上下文
-        if(StringUtils.isNotEmpty(chatRequest.getKid())){
-            List<Message> knMessages = new ArrayList<>();
-            String content = messages.get(messages.size() - 1).getContent().toString();
-            List<String> nearestList;
-            List<Double> queryVector = embeddingService.getQueryVector(content, chatRequest.getKid());
-            nearestList = vectorStore.nearest(queryVector, chatRequest.getKid());
-            for (String prompt : nearestList) {
-                Message userMessage = Message.builder().content(prompt).role(Message.Role.USER).build();
-                knMessages.add(userMessage);
-            }
-            Message userMessage = Message.builder().content(content + (!nearestList.isEmpty() ? "\n\n注意：回答问题时，须严格根据我给你的系统上下文内容原文进行回答，请不要自己发挥,回答时保持原来文本的段落层级" : "")).role(Message.Role.USER).build();
-            knMessages.add(userMessage);
-            messages.addAll(knMessages);
-        }
         // 用户对话内容
         String chatString = null;
         // 获取用户对话信息

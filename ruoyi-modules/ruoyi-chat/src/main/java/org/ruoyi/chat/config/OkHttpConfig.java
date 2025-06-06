@@ -4,7 +4,6 @@ import jakarta.annotation.PostConstruct;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.ruoyi.common.core.utils.OkHttpUtil;
-
 import org.ruoyi.domain.vo.ChatModelVo;
 import org.ruoyi.service.IChatModelService;
 import org.springframework.stereotype.Component;
@@ -25,11 +24,13 @@ public class OkHttpConfig {
     public void init() {
         initializeOkHttpUtil("suno");
         initializeOkHttpUtil("luma");
-        initializeOkHttpUtil("ppt");
     }
 
     private void initializeOkHttpUtil(String modelName) {
         ChatModelVo chatModelVo = chatModelService.selectModelByName(modelName);
+        if(chatModelVo==null){
+            return;
+        }
         OkHttpUtil okHttpUtil = new OkHttpUtil();
         okHttpUtil.setApiHost(chatModelVo.getApiHost());
         okHttpUtil.setApiKey(chatModelVo.getApiKey());

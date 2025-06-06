@@ -1,13 +1,13 @@
 package org.ruoyi.service.impl;
 
-import org.ruoyi.common.core.utils.MapstructUtils;
-import org.ruoyi.common.core.utils.StringUtils;
-import org.ruoyi.core.page.TableDataInfo;
-import org.ruoyi.core.page.PageQuery;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;
+import org.ruoyi.common.core.utils.MapstructUtils;
+import org.ruoyi.common.core.utils.StringUtils;
+import org.ruoyi.core.page.PageQuery;
+import org.ruoyi.core.page.TableDataInfo;
 import org.ruoyi.domain.ChatModel;
 import org.ruoyi.domain.bo.ChatModelBo;
 import org.ruoyi.domain.vo.ChatModelVo;
@@ -15,8 +15,9 @@ import org.ruoyi.mapper.ChatModelMapper;
 import org.ruoyi.service.IChatModelService;
 import org.springframework.stereotype.Service;
 
-
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 聊天模型Service业务层处理
@@ -93,7 +94,9 @@ public class ChatModelServiceImpl implements IChatModelService {
     @Override
     public Boolean updateByBo(ChatModelBo bo) {
         ChatModel update = MapstructUtils.convert(bo, ChatModel.class);
-        validEntityBeforeSave(update);
+        if (update != null) {
+            validEntityBeforeSave(update);
+        }
         return baseMapper.updateById(update) > 0;
     }
 
@@ -101,7 +104,11 @@ public class ChatModelServiceImpl implements IChatModelService {
      * 保存前的数据校验
      */
     private void validEntityBeforeSave(ChatModel entity){
-        //TODO 做一些数据校验,如唯一约束
+        // 判断是否包含*号
+        if (entity.getApiKey().contains("*")) {
+            // 重新设置key信息
+            entity.setApiKey(baseMapper.selectById(entity.getId()).getApiKey());
+        }
     }
 
     /**
@@ -120,8 +127,18 @@ public class ChatModelServiceImpl implements IChatModelService {
      */
     @Override
     public ChatModelVo selectModelByName(String modelName) {
-       return baseMapper.selectVoOne(Wrappers.<ChatModel>lambdaQuery().eq(ChatModel::getModelName, modelName));
+        return baseMapper.selectVoOne(Wrappers.<ChatModel>lambdaQuery().eq(ChatModel::getModelName, modelName));
+    }
+    /**
+     * 通过模型分类获取模型信息
+     */
+    @Override
+    public ChatModelVo selectModelByCategory(String  category) {
+        return baseMapper.selectVoOne(Wrappers.<ChatModel>lambdaQuery().eq(ChatModel::getCategory, category));
     }
 
-
+    @Override
+    public ChatModel getPPT() {
+        return baseMapper.selectOne(Wrappers.<ChatModel>lambdaQuery().eq(ChatModel::getModelName, "ppt"));
+    }
 }

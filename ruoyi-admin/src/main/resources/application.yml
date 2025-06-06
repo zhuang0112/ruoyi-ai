@@ -49,7 +49,7 @@ server:
 # 日志配置
 logging:
   level:
-    org.dromara: @logging.level@
+    org.ruoyi: @logging.level@
     org.springframework: warn
     org.mybatis.spring.mapper: error
     org.apache.fury: warn
@@ -120,6 +120,8 @@ sa-token:
 security:
   # 排除路径
   excludes:
+    # 获取模型信息
+    - /system/model/modelList
     # 支付回调
     - /pay/returnUrl
     - /pay/notifyUrl
@@ -128,7 +130,9 @@ security:
     # 重置密码
     - /auth/reset/password
     # 聊天接口
-    - /chat
+    - /chat/send
+    # 文件上传
+    - /chat/upload
     # 静态资源
     - /*.html
     - /**/*.html
@@ -215,13 +219,18 @@ mybatis-encryptor:
   publicKey:
   privateKey:
 
-# Swagger配置
-swagger:
+springdoc:
+  api-docs:
+    # 是否开启接口文档
+    enabled: true
+  #  swagger-ui:
+  #    # 持久化认证数据
+  #    persistAuthorization: true
   info:
     # 标题
-    title: '标题：${ruoyi.name}多租户管理系统_接口文档'
+    title: '标题：RuoYi-Vue-Plus多租户管理系统_接口文档'
     # 描述
-    description: '描述：用于管理集团旗下公司的人员信息,具体包括XXX,XXX模块...'
+    description: ' 用于管理集团旗下公司的人员信息,具体包括XXX,XXX模块...'
     # 版本
     version: '版本号: ${ruoyi.version}'
     # 作者信息
@@ -236,24 +245,10 @@ swagger:
         type: APIKEY
         in: HEADER
         name: ${sa-token.token-name}
-
-springdoc:
-  api-docs:
-    # 是否开启接口文档
-    enabled: true
-  swagger-ui:
-    # 持久化认证数据
-    persistAuthorization: true
   #这里定义了两个分组，可定义多个，也可以不定义
   group-configs:
-    - group: 1.演示模块
-      packages-to-scan: org.ruoyi.demo
-    - group: 2.通用模块
-      packages-to-scan: org.ruoyi.web
-    - group: 3.系统模块
+    - group: 1.系统模块
       packages-to-scan: org.ruoyi.system
-    - group: 4.代码生成模块
-      packages-to-scan: org.ruoyi.generator
 
 # 防止XSS攻击
 xss:
@@ -299,26 +294,6 @@ websocket:
   path: '/resource/websocket'
   # 设置访问源地址
   allowedOrigins: '*'
-
-# 微信小程序配置信息
-wx:
-  miniapp:
-    configs:
-      - appid: # 你的appid
-        secret: # 你的secret
-        token: #微信小程序消息服务器配置的token
-        aesKey: #微信小程序消息服务器配置的EncodingAESKey
-        msgDataFormat: JSON
-
-  #  企业微信应用
-wechat:
-  cp:
-    corpId:
-    appConfigs:
-      - agentId:
-        secret: ''
-        token:   ''
-        aesKey: ''
 
 spring:
   ai:

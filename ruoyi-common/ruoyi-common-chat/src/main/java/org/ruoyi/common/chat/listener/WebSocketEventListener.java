@@ -7,16 +7,14 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 import okhttp3.sse.EventSource;
 import okhttp3.sse.EventSourceListener;
-import org.ruoyi.common.chat.constant.OpenAIConst;
 import org.ruoyi.common.chat.entity.chat.ChatCompletionResponse;
-import org.ruoyi.common.chat.entity.chat.Message;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
 import java.util.Objects;
 
 /**
- * 描述：OpenAI流式输出Socket接收
+ *  OpenAI流式输出Socket接收
  *
  * @author https:www.unfbx.com
  * @date 2023-03-23
@@ -63,7 +61,7 @@ public class WebSocketEventListener extends EventSourceListener {
             delta = mapper.writeValueAsString(completionResponse.getChoices().get(0).getDelta());
         }catch (Exception e){
             log.error("转换失败{}",e.getMessage());
-        }   
+        }
         session.sendMessage(new TextMessage(delta));
     }
 

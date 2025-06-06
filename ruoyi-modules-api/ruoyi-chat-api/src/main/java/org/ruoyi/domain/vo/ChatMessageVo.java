@@ -1,18 +1,15 @@
 package org.ruoyi.domain.vo;
 
-import java.math.BigDecimal;
-
 import com.alibaba.excel.annotation.ExcelIgnoreUnannotated;
 import com.alibaba.excel.annotation.ExcelProperty;
-
 import io.github.linpeilie.annotations.AutoMapper;
 import lombok.Data;
 import org.ruoyi.domain.ChatMessage;
 
 import java.io.Serial;
 import java.io.Serializable;
-
-
+import java.math.BigDecimal;
+import java.util.Date;
 
 
 /**
@@ -40,6 +37,11 @@ public class ChatMessageVo implements Serializable {
      */
     @ExcelProperty(value = "用户id")
     private Long userId;
+
+    /**
+     * 会话id
+     */
+    private Long sessionId;
 
     /**
      * 消息内容
@@ -76,6 +78,13 @@ public class ChatMessageVo implements Serializable {
      */
     @ExcelProperty(value = "备注")
     private String remark;
+
+
+    /**
+     * 创建时间
+     */
+    @ExcelProperty(value = "创建时间")
+    private Date createTime;
 
 
 }
