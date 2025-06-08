@@ -1,19 +1,7 @@
 package org.ruoyi.common.oss.core;
 
-import cn.hutool.core.io.IoUtil;
+import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.IdUtil;
-import com.amazonaws.ClientConfiguration;
-import com.amazonaws.HttpMethod;
-import com.amazonaws.Protocol;
-import com.amazonaws.auth.AWSCredentials;
-import com.amazonaws.auth.AWSCredentialsProvider;
-import com.amazonaws.auth.AWSStaticCredentialsProvider;
-import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.client.builder.AwsClientBuilder;
-import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3Client;
-import com.amazonaws.services.s3.AmazonS3ClientBuilder;
-import com.amazonaws.services.s3.model.*;
 import org.ruoyi.common.core.utils.DateUtils;
 import org.ruoyi.common.core.utils.StringUtils;
 import org.ruoyi.common.oss.constant.OssConstant;
@@ -22,11 +10,12 @@ import org.ruoyi.common.oss.enumd.AccessPolicyType;
 import org.ruoyi.common.oss.enumd.PolicyType;
 import org.ruoyi.common.oss.exception.OssException;
 import org.ruoyi.common.oss.properties.OssProperties;
+import org.ruoyi.common.oss.storage.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.net.URL;
-import java.util.Date;
+
+import static org.aspectj.weaver.tools.cache.SimpleCacheFactory.path;
 
 /**
  * S3 存储协议 所有兼容S3协议的云厂商均支持
@@ -40,35 +29,14 @@ public class OssClient {
 
     private final OssProperties properties;
 
-    private final AmazonS3 client;
+    private final AbstractStorageClient client;
 
     public OssClient(String configKey, OssProperties ossProperties) {
         this.configKey = configKey;
         this.properties = ossProperties;
         try {
-            AwsClientBuilder.EndpointConfiguration endpointConfig =
-                new AwsClientBuilder.EndpointConfiguration(properties.getEndpoint(), properties.getRegion());
-
-            AWSCredentials credentials = new BasicAWSCredentials(properties.getAccessKey(), properties.getSecretKey());
-            AWSCredentialsProvider credentialsProvider = new AWSStaticCredentialsProvider(credentials);
-            ClientConfiguration clientConfig = new ClientConfiguration();
-            if (OssConstant.IS_HTTPS.equals(properties.getIsHttps())) {
-                clientConfig.setProtocol(Protocol.HTTPS);
-            } else {
-                clientConfig.setProtocol(Protocol.HTTP);
-            }
-            AmazonS3ClientBuilder build = AmazonS3Client.builder()
-                .withEndpointConfiguration(endpointConfig)
-                .withClientConfiguration(clientConfig)
-                .withCredentials(credentialsProvider)
-                .disableChunkedEncoding();
-            if (!StringUtils.containsAny(properties.getEndpoint(), OssConstant.CLOUD_SERVICE)) {
-                // minio 使用https限制使用域名访问 需要此配置 站点填域名
-                build.enablePathStyleAccess();
-            }
-            this.client = build.build();
-
-            createBucket();
+        this.client = getStorageClient(configKey, ossProperties);
+            // createBucket();
         } catch (Exception e) {
             if (e instanceof OssException) {
                 throw e;
@@ -79,74 +47,74 @@ public class OssClient {
 
     public void createBucket() {
         try {
-            String bucketName = properties.getBucketName();
-            if (client.doesBucketExistV2(bucketName)) {
-                return;
-            }
-            CreateBucketRequest createBucketRequest = new CreateBucketRequest(bucketName);
-            AccessPolicyType accessPolicy = getAccessPolicy();
-            createBucketRequest.setCannedAcl(accessPolicy.getAcl());
-            client.createBucket(createBucketRequest);
-            client.setBucketPolicy(bucketName, getPolicy(bucketName, accessPolicy.getPolicyType()));
+           client.createBucket(properties.getBucketName());
         } catch (Exception e) {
             throw new OssException("创建Bucket失败, 请核对配置信息:[" + e.getMessage() + "]");
         }
     }
 
-    public UploadResult upload(byte[] data, String path, String contentType) {
-        return upload(new ByteArrayInputStream(data), path, contentType);
-    }
+    // public UploadResult upload(byte[] data, String path, String contentType) {
+    //     return upload(new ByteArrayInputStream(data), path, contentType);
+    // }
+    //
+    // public UploadResult upload(InputStream inputStream, String path, String contentType) {
+    //
+    //     if (!(inputStream instanceof ByteArrayInputStream)) {
+    //         inputStream = new ByteArrayInputStream(IoUtil.readBytes(inputStream));
+    //     }
+    //     try {
+    //         ObjectMetadata metadata = new ObjectMetadata();
+    //         metadata.setContentType(contentType);
+    //         metadata.setContentLength(inputStream.available());
+    //         PutObjectRequest putObjectRequest = new PutObjectRequest(properties.getBucketName(), path, inputStream, metadata);
+    //         // 设置上传对象的 Acl 为公共读
+    //         putObjectRequest.setCannedAcl(getAccessPolicy().getAcl());
+    //         client.putObject(putObjectRequest);
+    //     } catch (Exception e) {
+    //         throw new OssException("上传文件失败，请检查配置信息:[" + e.getMessage() + "]");
+    //     }
+    //     return UploadResult.builder().url(getUrl() + "/" + path).filename(path).build();
+    // }
 
-    public UploadResult upload(InputStream inputStream, String path, String contentType) {
-        if (!(inputStream instanceof ByteArrayInputStream)) {
-            inputStream = new ByteArrayInputStream(IoUtil.readBytes(inputStream));
-        }
+    public void delete(String url) {
+        String fileRelativePath = client.getFileRelativePathFromUrl(url);
         try {
-            ObjectMetadata metadata = new ObjectMetadata();
-            metadata.setContentType(contentType);
-            metadata.setContentLength(inputStream.available());
-            PutObjectRequest putObjectRequest = new PutObjectRequest(properties.getBucketName(), path, inputStream, metadata);
-            // 设置上传对象的 Acl 为公共读
-            putObjectRequest.setCannedAcl(getAccessPolicy().getAcl());
-            client.putObject(putObjectRequest);
-        } catch (Exception e) {
-            throw new OssException("上传文件失败，请检查配置信息:[" + e.getMessage() + "]");
-        }
-        return UploadResult.builder().url(getUrl() + "/" + path).filename(path).build();
-    }
-
-    public void delete(String path) {
-        path = path.replace(getUrl() + "/", "");
-        try {
-            client.deleteObject(properties.getBucketName(), path);
+            client.executeDelete(fileRelativePath);
         } catch (Exception e) {
             throw new OssException("删除文件失败，请检查配置信息:[" + e.getMessage() + "]");
         }
     }
 
-    public UploadResult uploadSuffix(byte[] data, String suffix, String contentType) {
-        return upload(data, getPath(properties.getPrefix(), suffix), contentType);
+    public UploadResult upload(MultipartFile file) {
+        String url = client.uploadFile(file);
+        return UploadResult.builder().url(url).filename(FileUtil.getName(url)).build();
+
     }
 
-    public UploadResult uploadSuffix(InputStream inputStream, String suffix, String contentType) {
-        return upload(inputStream, getPath(properties.getPrefix(), suffix), contentType);
-    }
+    // public UploadResult uploadSuffix(byte[] data, String suffix, String contentType) {
+    //     return upload(data, getPath(properties.getPrefix(), suffix), contentType);
+    // }
+    //
+    // public UploadResult uploadSuffix(InputStream inputStream, String suffix, String contentType) {
+    //     return upload(inputStream, getPath(properties.getPrefix(), suffix), contentType);
+    // }
 
     /**
      * 获取文件元数据
      *
-     * @param path 完整文件路径
+     * @param url 完整文件路径
      */
-    public ObjectMetadata getObjectMetadata(String path) {
+    public InputStream getObjectMetadata(String url) {
+        String fileRelativePath = client.getFileRelativePathFromUrl(url);
         path = path.replace(getUrl() + "/", "");
-        S3Object object = client.getObject(properties.getBucketName(), path);
-        return object.getObjectMetadata();
+        InputStream object = client.downloadFile(fileRelativePath);
+        return object;
     }
 
-    public InputStream getObjectContent(String path) {
-        path = path.replace(getUrl() + "/", "");
-        S3Object object = client.getObject(properties.getBucketName(), path);
-        return object.getObjectContent();
+    public InputStream getObjectContent(String url) {
+        String fileRelativePath = client.getFileRelativePathFromUrl(url);
+        InputStream object = client.downloadFile(fileRelativePath);
+        return object;
     }
 
     public String getUrl() {
@@ -190,12 +158,13 @@ public class OssClient {
      * @param second    授权时间
      */
     public String getPrivateUrl(String objectKey, Integer second) {
-        GeneratePresignedUrlRequest generatePresignedUrlRequest =
-            new GeneratePresignedUrlRequest(properties.getBucketName(), objectKey)
-                .withMethod(HttpMethod.GET)
-                .withExpiration(new Date(System.currentTimeMillis() + 1000L * second));
-        URL url = client.generatePresignedUrl(generatePresignedUrlRequest);
-        return url.toString();
+        // GeneratePresignedUrlRequest generatePresignedUrlRequest =
+        //         new GeneratePresignedUrlRequest(properties.getBucketName(), objectKey)
+        //                 .withMethod(HttpMethod.GET)
+        //                 .withExpiration(new Date(System.currentTimeMillis() + 1000L * second));
+        // URL url = client.generatePresignedUrl(generatePresignedUrlRequest);
+        // return url.toString();
+        return "";
     }
 
     /**
@@ -232,14 +201,39 @@ public class OssClient {
         }
         builder.append("{\n\"Action\": ");
         builder.append(switch (policyType) {
-            case WRITE -> "[\n\"s3:AbortMultipartUpload\",\n\"s3:DeleteObject\",\n\"s3:ListMultipartUploadParts\",\n\"s3:PutObject\"\n],\n";
-            case READ_WRITE -> "[\n\"s3:AbortMultipartUpload\",\n\"s3:DeleteObject\",\n\"s3:GetObject\",\n\"s3:ListMultipartUploadParts\",\n\"s3:PutObject\"\n],\n";
+            case WRITE ->
+                    "[\n\"s3:AbortMultipartUpload\",\n\"s3:DeleteObject\",\n\"s3:ListMultipartUploadParts\",\n\"s3:PutObject\"\n],\n";
+            case READ_WRITE ->
+                    "[\n\"s3:AbortMultipartUpload\",\n\"s3:DeleteObject\",\n\"s3:GetObject\",\n\"s3:ListMultipartUploadParts\",\n\"s3:PutObject\"\n],\n";
             default -> "\"s3:GetObject\",\n";
         });
         builder.append("\"Effect\": \"Allow\",\n\"Principal\": \"*\",\n\"Resource\": \"arn:aws:s3:::");
         builder.append(bucketName);
         builder.append("/*\"\n}\n],\n\"Version\": \"2012-10-17\"\n}\n");
         return builder.toString();
+    }
+
+    private AbstractStorageClient getStorageClient(String configKey, OssProperties properties) {
+
+        switch (configKey) {
+            case OssConstant.MINIO -> {
+                return new MinioStorageClient(properties);
+            }
+            case OssConstant.ALIYUN -> {
+                return new OssStorageClient(properties);
+            }
+            case OssConstant.QCLOUD -> {
+                return new CosStorageClient(properties);
+            }
+            case OssConstant.QINIU -> {
+                return new KodoStorageClient(properties);
+            }
+            default -> {
+                throw new OssException("存储配置有误！");
+            }
+
+        }
+
     }
 
 }

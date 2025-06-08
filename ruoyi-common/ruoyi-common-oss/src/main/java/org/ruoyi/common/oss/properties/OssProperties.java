@@ -55,4 +55,8 @@ public class OssProperties {
      */
     private String accessPolicy;
 
+    public String getEndpoint() {
+       return this.isHttps.equals("Y") ? "https://" : "http://" + this.endpoint;
+    }
+
 }

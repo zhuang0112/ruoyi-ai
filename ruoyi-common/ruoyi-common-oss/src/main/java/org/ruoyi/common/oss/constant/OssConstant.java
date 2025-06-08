@@ -35,4 +35,12 @@ public interface OssConstant {
      */
     String IS_HTTPS = "Y";
 
+    String MINIO = "minio";
+
+    String QINIU = "qiniu";
+
+    String ALIYUN = "aliyun";
+
+    String QCLOUD = "qcloud";
+    String SLASH = "/";
 }

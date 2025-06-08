@@ -15,7 +15,7 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @EnableScheduling
 @EnableAsync
-@ComponentScan(basePackages = {"com.zhuang.*", "org.ruoyi.*"})
+// @ComponentScan(basePackages = {"com.zhuang.*", "org.ruoyi.*"})
 public class RuoYiAIApplication {
 
     public static void main(String[] args) {

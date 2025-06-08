@@ -16,7 +16,50 @@
         ruoyi-common-oss oss服务
     </description>
 
+
+    <properties>
+        <!--==============  对象存储依赖  ==================-->
+        <cos.version>5.6.89</cos.version>
+        <kodo.version>[7.7.0, 7.10.99]</kodo.version>
+        <oss.version>3.15.1</oss.version>
+        <minio.version>8.2.0</minio.version>
+        <s3.version>1.12.691</s3.version>
+    </properties>
+
     <dependencies>
+
+        <!--================== 对象存储依赖 =======================-->
+        <!-- minio -->
+        <dependency>
+            <groupId>io.minio</groupId>
+            <artifactId>minio</artifactId>
+            <version>${minio.version}</version>
+        </dependency>
+        <!-- 腾讯云Cos对象存储 -->
+        <dependency>
+            <groupId>com.qcloud</groupId>
+            <artifactId>cos_api</artifactId>
+            <version>${cos.version}</version>
+        </dependency>
+        <!-- 七牛云Kodo对象存储 -->
+        <dependency>
+            <groupId>com.qiniu</groupId>
+            <artifactId>qiniu-java-sdk</artifactId>
+            <version>${kodo.version}</version>
+        </dependency>
+        <!--阿里云Oss对象存储-->
+        <dependency>
+            <groupId>com.aliyun.oss</groupId>
+            <artifactId>aliyun-sdk-oss</artifactId>
+            <version>${oss.version}</version>
+        </dependency>
+        <!--s3对象存储，支持任何兼容s3协议的对象存储，包括minio-->
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-s3</artifactId>
+            <version>${s3.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.ruoyi</groupId>
             <artifactId>ruoyi-common-json</artifactId>
@@ -25,11 +68,6 @@
         <dependency>
             <groupId>org.ruoyi</groupId>
             <artifactId>ruoyi-common-redis</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.amazonaws</groupId>
-            <artifactId>aws-java-sdk-s3</artifactId>
         </dependency>
 
         <dependency>
